@@ -1,0 +1,55 @@
+.main-container{
+    height: 100%;
+    background-color: #ffffff;
+    color: black;
+}
+
+.container-one, .container-two, .container-three{
+    display: flex;
+    height: 33.3%;
+
+}
+
+.container-one{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: center;
+}
+
+.container-one-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.container-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.custom-input {
+    width: 75%;
+    margin-bottom: 10px;
+}
+
+
+.container-three {
+    display: flex;
+    text-align: center;
+}
+
+.success-btn{
+    color: white;
+    width: 50%;
+    margin-bottom: 50px;
+}
+
