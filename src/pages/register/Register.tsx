@@ -41,7 +41,7 @@ import {
               <IonCol className="form-input">
                 <IonInput
                   className="custom-input"
-                  label="Correo electronico."
+                  label="Correo electronico"
                   type="email"
                   labelPlacement="floating"
                   fill="outline"
