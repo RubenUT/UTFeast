@@ -16,6 +16,8 @@ import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
+import Verify from './pages/verification/Verify';
+// Define your routes here
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -68,6 +70,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/Register">
           <Register />
+        </Route>
+        <Route exact path="/Veri">
+          <Verify />
         </Route>
           <Route exact path="/">
             <Redirect to="/tab1" />

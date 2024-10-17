@@ -1,0 +1,103 @@
+/* Contenedor Principal */
+.main-container {
+    height: 100vh; /* Ocupa toda la pantalla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+  }
+  
+  /* Estilo de cada sección del formulario */
+  .container-one,
+  .container-two,
+  .container-three {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Logo centrado */
+  .container-one-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo del avatar */
+  .container-one-logo ion-avatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+/* SVG Adaptable */
+.responsive-svg {
+    width: 40%;   /* Se adapta según el contenedor */
+    max-width: 120px; /* Máximo tamaño */
+    height: auto;  /* Mantener proporciones */
+    margin: 0 auto; /* Centrado */
+  }
+  
+  /* Títulos */
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    font-size: 18px;
+    color: #080808;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Input personalizado */
+  .custom-input {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    --border-radius: 8px;
+    --background: #f7f7f7;
+    --padding-start: 12px;
+  }
+  
+/* Botón de verificar */
+.success-btn {
+    width: 120%; /* Ocupa todo el ancho del contenedor inmediato */
+    max-width: 200px; /* Limita el ancho máximo */
+    height: 50px;
+    --background: #4caf50;
+    --border-radius: 20px;
+    margin-top: 15px;
+    margin-right: 100px;
+    
+  }
+  
+/* Contenedor del botón */
+.container-three {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente (si es necesario) */
+    height: auto; /* Ajusta el tamaño según el contenido */
+  }
+  
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+    .responsive-svg {
+      width: 60%;  /* Aumentar tamaño en pantallas pequeñas */
+    }
+  
+    h1 {
+      font-size: 1.8rem;
+    }
+  
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .responsive-svg {
+      width: 80%; /* Aún más grande para móviles */
+    }
+  }
