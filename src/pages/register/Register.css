@@ -1,12 +1,12 @@
 .main-container {
-    height: 100vh; /* Ocupar toda la pantalla */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
     color: black;
 }
 
-/* Cada contenedor ocupa 1/3 del espacio vertical */
+
 .container-one, 
 .container-two, 
 .container-three {
@@ -17,7 +17,7 @@
     padding: 10px;
     text-align: center;
 }
-/* Alineación específica para el logo en container-one */
+
 .container-one {
     align-items: flex-end;
 }
@@ -27,13 +27,12 @@
     justify-content: center;
 }
 
-/* Contenedor del formulario con inputs y botón */
+
 .container-two {
     flex-direction: column;
-    gap: 20px; /* Espacio entre los elementos */
+    gap: 20px;
 }
 
-/* Formulario con inputs centrados */
 .form-input {
     display: flex;
     flex-direction: column;
@@ -42,12 +41,11 @@
     gap: 10px;
 }
 
-/* Input personalizado */
 .custom-input {
     width: 75%;
 }
 
-/* Botón ubicado justo debajo de los inputs */
+
 .success-btn {
     color: white; 
     width: 50%;
@@ -55,10 +53,9 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px; /* Espacio entre el último input y el botón */
+    margin-top: 20px;
 }
 
-/* Alineación del tercer contenedor */
 .container-three {
     justify-content: center;
     align-items: flex-start;

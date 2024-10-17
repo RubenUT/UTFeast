@@ -1,34 +1,34 @@
-.main-container{
+.login{
     height: 100%;
     background-color: #ffffff;
     color: black;
 }
 
-.container-one, .container-two, .container-three{
+.login__header, .login__form, .login__bottom {
     display: flex;
     height: 33.3%;
 
 }
 
-.container-one{
+.login__header{
     display: flex;
     justify-content: center;
     align-items: flex-end;
     text-align: center;
 }
 
-.container-one-logo {
+.login__header-logo {
     display: flex;
     justify-content: center;
 }
 
-.container-two {
+.login__form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.form-input {
+.login__input-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,19 +36,18 @@
     width: 100%;
 }
 
-.custom-input {
+.login__input {
     width: 75%;
     margin-bottom: 10px;
 }
 
 
-.container-three {
+.login__bottom {
     display: flex;
     text-align: center;
 }
 
-.success-btn{
-    color: white;
+.login__button {
     width: 50%;
     margin-bottom: 50px;
 }

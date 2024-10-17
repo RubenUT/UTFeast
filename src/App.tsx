@@ -46,6 +46,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Verify from './pages/register/Verify';
 
 setupIonicReact();
 
@@ -64,11 +65,14 @@ const App: React.FC = () => (
             <Tab3 />
           </Route>
           <Route exact path="/Login">
-          <Login />
-        </Route>
-        <Route exact path="/Register">
-          <Register />
-        </Route>
+            <Login />
+          </Route>
+          <Route exact path="/Register">
+            <Register />
+          </Route>
+          <Route exact path="/Verify">
+            <Verify />
+          </Route>
           <Route exact path="/">
             <Redirect to="/tab1" />
           </Route>
