@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { IonButton, IonIcon } from '@ionic/react';
 import { arrowBackOutline } from 'ionicons/icons';
+import './BackButton.css';
 
 const BackButton: React.FC = () => {
   const history = useHistory();
