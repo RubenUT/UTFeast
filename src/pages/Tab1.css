@@ -1,4 +1,30 @@
-#hello{
+#hello {
     margin: 0 auto;
     text-align: center;
-}
+  }
+  
+  .centered-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cardsImg {
+    border-radius: 50%;
+    width: 60px;
+  }
+  
+  .Cardscategorias {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .Categorias {
+    min-width: 120px;
+    margin-right: 10px;
+    flex-shrink: 1%;
+  }

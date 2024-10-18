@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonItem, IonList, IonSearchbar } from '@ionic/react';
+import { IonItem, IonList, IonSearchbar, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
 function Tab2() {
   const data = [
@@ -17,23 +17,29 @@ function Tab2() {
   let [results, setResults] = useState([...data]);
 
   const handleInput = (ev: Event) => {
-    let query = '';
-    const target = ev.target as HTMLIonSearchbarElement;
-    if (target) query = target.value!.toLowerCase();
-
-    setResults(data.filter((d) => d.toLowerCase().indexOf(query) > -1));
+    let query = (ev.target as HTMLInputElement).value.toLowerCase();
+    setResults(data.filter(item => item.toLowerCase().includes(query)));
   };
 
   return (
-    <>
-      <IonSearchbar debounce={1000} onIonInput={(ev) => handleInput(ev)}></IonSearchbar>
-
-      <IonList>
-        {results.map((result) => (
-          <IonItem>{result}</IonItem>
-        ))}
-      </IonList>
-    </>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Tab 2</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonSearchbar onIonInput={handleInput}></IonSearchbar>
+        <IonList>
+          {results.map((item, index) => (
+            <IonItem key={index}>
+              {item}
+            </IonItem>
+          ))}
+        </IonList>
+      </IonContent>
+    </IonPage>
   );
 }
+
 export default Tab2;
