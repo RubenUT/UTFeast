@@ -10,14 +10,14 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { ellipse, home, person, search, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
+import Tab2 from './pages/Buscador/Tab2';
 import Tab3 from './pages/Tab3';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import Verify from './pages/verification/Verify';
 // Define your routes here
+import ProductInfo from './pages/ProductInfo/productInfo';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -48,6 +48,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Verify from './pages/register/Verify';
 
 setupIonicReact();
 
@@ -66,30 +67,30 @@ const App: React.FC = () => (
             <Tab3 />
           </Route>
           <Route exact path="/Login">
-          <Login />
-        </Route>
-        <Route exact path="/Register">
-          <Register />
-        </Route>
-        <Route exact path="/Veri">
-          <Verify />
-        </Route>
+            <Login />
+          </Route>
+          <Route exact path="/Register">
+            <Register />
+          </Route>
+          <Route exact path="/Verify">
+            <Verify />
+          </Route>
+          <Route exact path="/Producto-Information">
+            <ProductInfo />
+          </Route>
           <Route exact path="/">
             <Redirect to="/tab1" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>Tab 100</IonLabel>
+            <IonIcon aria-hidden="true" icon={home} />
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon aria-hidden="true" icon={search} />
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonIcon aria-hidden="true" icon={person} />
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

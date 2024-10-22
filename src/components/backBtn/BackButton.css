@@ -1,0 +1,12 @@
+.backButton {
+    position: absolute; 
+    top: 10px; 
+    left: 10px;
+    max-width: 25px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.backButton ion-icon {
+    font-size: 20px;
+}
