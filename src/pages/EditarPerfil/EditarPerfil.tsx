@@ -41,7 +41,7 @@ const EditarPerfil: React.FC = () => {
             descripcion,
             image
         });
-        history.push('/tab3');
+        history.push('/Perfil');
     };
 
     const handleCancelChanges = () => {

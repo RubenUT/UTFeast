@@ -8,13 +8,12 @@ const Verify: React.FC = () => {
         <IonPage>
             <IonContent>
                 <IonGrid className="verify">
-                <BackButton />
+                    <BackButton />
                     <IonRow className="verify__top">
                         <IonCol className="verify__col--top">
                             <IonImg
                                 className="verify__img"
-                                src="https://docs-demo.ionic.io/assets/madison.jpg"
-                                alt="The Wisconsin State Capitol building in Madison, WI at night"
+                                alt="UTFeast Logo" src="src\assets\images\utfeast-logo.svg"
                             ></IonImg>
                         </IonCol>
                     </IonRow>

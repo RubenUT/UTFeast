@@ -16,7 +16,7 @@ const ProductInfo: React.FC = () => {
 
             <IonContent>
                 <div className="product-image-container">
-                    <IonImg src="path-to-image.jpg" alt="Product" className="product-image" />
+                    <IonImg src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpatijinich.com%2Fes%2Fchilaquiles-verdes%2F&psig=AOvVaw1RFfd5K-ArcCCasg58CFuT&ust=1729823309779000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKirjZD8pYkDFQAAAAAdAAAAABAE" alt="Product" className="product-image" />
                 </div>
             </IonContent>
 

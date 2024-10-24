@@ -12,10 +12,10 @@ const BackButton: React.FC = () => {
   };
 
   return (
-    <IonButton className='backButton' onClick={handleBack} shape='round'>
-      <IonIcon icon={arrowBackOutline}/>
+    <IonButton className="backButton" onClick={handleBack} shape="round">
+      <IonIcon icon={arrowBackOutline} slot="icon-only" />
     </IonButton>
   );
 };
 
-export default BackButton;
+export default BackButton;

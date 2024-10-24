@@ -16,9 +16,10 @@ import Tab2 from './pages/Buscador/Tab2';
 import Tab3 from './pages/Tab3';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
+import EditarPerfil from './pages/EditarPerfil/EditarPerfil';
+import ProductoCategoria from './pages/producto-categoria/ProductoCategoria';
 // Define your routes here
 import ProductInfo from './pages/ProductInfo/productInfo';
-import EditarPerfil from './pages/EditarPerfil/EditarPerfil';
 import Perfil from './pages/Perfil/perfil';
 
 /* Core CSS required for Ionic components to work properly */
@@ -65,9 +66,6 @@ const App: React.FC = () => (
           <Route exact path="/tab2">
             <Tab2 />
           </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
           <Route exact path="/Login">
             <Login />
           </Route>
@@ -80,8 +78,14 @@ const App: React.FC = () => (
           <Route exact path="/Producto-Information">
             <ProductInfo />
           </Route>
+          <Route exact path="/EditarPerfil">
+            <EditarPerfil />
+          </Route>
+          <Route exact path="/ProductoCategoria">
+            <ProductoCategoria />
+          </Route>
           <Route exact path="/">
-            <Redirect to="/tab1" />
+            <Redirect to="/login" />
           </Route>
           <Route exact path="/Editar-Perfil">
             <EditarPerfil />

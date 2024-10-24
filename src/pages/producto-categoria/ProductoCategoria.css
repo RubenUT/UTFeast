@@ -1,0 +1,31 @@
+.procat {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: black;
+}
+
+.procat__row--top {
+    height: 20%;
+}
+
+
+.procat__row--mid,
+.procat__row--bottom {
+    height: 40%;
+}
+
+.Cardscategorias {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.Categorias {
+    min-width: 120px;
+    margin-right: 10px;
+    flex-shrink: 1%;
+}
