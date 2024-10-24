@@ -18,6 +18,8 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 // Define your routes here
 import ProductInfo from './pages/ProductInfo/productInfo';
+import EditarPerfil from './pages/EditarPerfil/EditarPerfil';
+import Perfil from './pages/Perfil/perfil';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -81,6 +83,12 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/tab1" />
           </Route>
+          <Route exact path="/Editar-Perfil">
+            <EditarPerfil />
+          </Route>
+          <Route exact path="/Perfil">
+            <Perfil />
+          </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
@@ -89,7 +97,7 @@ const App: React.FC = () => (
           <IonTabButton tab="tab2" href="/tab2">
             <IonIcon aria-hidden="true" icon={search} />
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
+          <IonTabButton tab="tab3" href="/Perfil">
             <IonIcon aria-hidden="true" icon={person} />
           </IonTabButton>
         </IonTabBar>

@@ -1,88 +1,122 @@
-import React, { useState } from 'react';
-import { IonIcon } from '@ionic/react';
-import { home } from 'ionicons/icons';
+import React, { useState, useRef } from 'react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import './EditarPerfil.css';
 
 const EditarPerfil: React.FC = () => {
     const history = useHistory();
+    
+    const [nombre, setNombre] = useState<string>('NombreUsuario');
+    const [descripcion, setDescripcion] = useState<string>('Esta es la descripción del usuario.');
+    const [image, setImage] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const textareaRef = useRef<HTMLIonTextareaElement>(null);
 
-    const initialConfig = {
-        config1: 'Valor Configuración 1',
-        config2: 'Valor Configuración 2',
-        config3: 'Valor Configuración 3',
-        config4: 'Valor Configuración 4'
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            setImage(file);
+            setImagePreview(URL.createObjectURL(file));
+        }
     };
 
-    const [config, setConfig] = useState(initialConfig);
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setConfig({ ...config, [name]: value });
+    const handleDescriptionChange = (event: CustomEvent) => {
+        const textarea = event.target as HTMLIonTextareaElement;
+        setDescripcion(textarea.value || '');
+        adjustTextareaHeight();
     };
 
-    const handleSaveChanges = () => {
-        console.log('Configuración guardada:', config);
+    const adjustTextareaHeight = () => {
+        if (textareaRef.current) {
+            const textarea = textareaRef.current;
+            textarea.style.height = 'auto';
+            textarea.style.height = `${textarea.scrollHeight}px`;
+        }
+    };
+
+    const handleSaveChanges = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log({
+            nombre,
+            descripcion,
+            image
+        });
         history.push('/tab3');
     };
 
     const handleCancelChanges = () => {
-        setConfig(initialConfig);
+        setNombre('NombreUsuario');
+        setDescripcion('Esta es la descripción del usuario.');
+        setImage(null);
+        setImagePreview(null);
         history.push('/tab3');
     };
 
     return (
-        <div className="editar-perfil-container">
-            <div className="header">
-                <h1>Editar Perfil</h1>
-            </div>
-            <div className="config-list">
-                <div className="config-item">
-                    <label>Configuración 1:</label>
-                    <input
-                        type="text"
-                        name="config1"
-                        value={config.config1}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="config-item">
-                    <label>Configuración 2:</label>
-                    <input
-                        type="text"
-                        name="config2"
-                        value={config.config2}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="config-item">
-                    <label>Configuración 3:</label>
-                    <input
-                        type="text"
-                        name="config3"
-                        value={config.config3}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="config-item">
-                    <label>Configuración 4:</label>
-                    <input
-                        type="text"
-                        name="config4"
-                        value={config.config4}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </div>
-            <div className="button-group">
-                <button className="save-btn" onClick={handleSaveChanges}>
-                    Guardar Cambios
-                </button>
-                <button className="cancel-btn" onClick={handleCancelChanges}>
-                    Deshacer Cambios
-                </button>
-            </div>
-        </div>
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle>Editar Perfil</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent className="ion-padding">
+                <form onSubmit={handleSaveChanges} className="form">
+
+                <IonItem className="form-group">
+                        <IonLabel position="stacked">Imagen de Perfil:</IonLabel>
+                        <input type="file" id="image" onChange={handleImageChange} />
+                    </IonItem>
+
+                    {imagePreview && (
+                        <IonItem className="form-group">
+                            <IonImg src={imagePreview} alt="Vista previa de la imagen de perfil" />
+                        </IonItem>
+                    )}
+                    
+                    <IonItem className="form-group">
+                        <IonLabel position="stacked">Nombre de Usuario:</IonLabel>
+                        <IonInput
+                            type="text"
+                            value={nombre}
+                            onIonChange={(e) => setNombre(e.detail.value!)}
+                        />
+                    </IonItem>
+
+                    <IonItem className="form-group">
+                        <IonLabel position="stacked">Descripción:</IonLabel>
+                        <IonTextarea
+                            ref={textareaRef}
+                            value={descripcion}
+                            onIonInput={handleDescriptionChange}
+                            autoGrow={true}
+                            className="auto-expand"
+                        />
+                    </IonItem>
+
+                    <div className="button-container">
+                    <IonButton 
+                        expand="block" 
+                        type="submit" 
+                        className="save-btn" 
+                        fill="solid"
+                        color="#4CAF50"
+                    >
+                        Guardar cambios
+                    </IonButton>
+                    <IonButton 
+                        expand="block" 
+                        color="#f44336"
+                        className="cancel-btn" 
+                        fill="solid"
+                        onClick={handleCancelChanges}
+                    >
+                        Deshacer cambios
+                    </IonButton>
+
+                    </div>
+                </form>
+            </IonContent>
+        </IonPage>
     );
 };
 

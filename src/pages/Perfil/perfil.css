@@ -1,0 +1,34 @@
+.perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .perfil-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  
+  .descripcion {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    margin-top: 5px;
+  }
+  
+  .edit-button {
+    margin-top: 20px;
+  }
+  
