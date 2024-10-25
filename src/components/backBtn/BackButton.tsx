@@ -12,7 +12,7 @@ const BackButton: React.FC = () => {
   };
 
   return (
-    <IonButton className="backButton" onClick={handleBack} shape="round">
+    <IonButton className="backButton" onClick={handleBack} shape="round" color="light">
       <IonIcon icon={arrowBackOutline} slot="icon-only" />
     </IonButton>
   );
