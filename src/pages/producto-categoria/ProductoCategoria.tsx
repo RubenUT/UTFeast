@@ -1,4 +1,4 @@
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCol, IonContent, IonGrid, IonImg, IonPage, IonRouterLink, IonRow, IonSearchbar, IonText } from "@ionic/react";
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCol, IonContent, IonGrid, IonImg, IonPage, IonRouterLink, IonRow, IonSearchbar, IonText, IonToolbar } from "@ionic/react";
 import './ProductoCategoria.css';
 import BackButton from "../../components/backBtn/BackButton";
 import { searchCircle } from "ionicons/icons";
@@ -52,42 +52,35 @@ const ProductoCategoria: React.FC = () => {
 
     return (
         <IonPage>
-            <IonContent>
-                <IonGrid className="procat">
+        <IonContent>
+            <IonGrid className="procat">
+                <IonToolbar>
                     <BackButton />
-                    <IonRow className="procat__row--top">
-                        <IonCol className="procat__top--col">
-                            <IonRouterLink routerLink="/tab2">
-                                <IonSearchbar style={{ marginTop: '75px' }} value="¿Que producto buscas?"></IonSearchbar>
-                            </IonRouterLink>
+                </IonToolbar>
+                <IonRow className="procat__row--top">
+                    <IonCol className="procat__top--col">
+                        <IonRouterLink routerLink="/tab2">
+                            <IonSearchbar
+                                placeholder="Buscar tu comida"
+                                mode="ios"
+                                showCancelButton="never"
+                            />
+                        </IonRouterLink>
+                    </IonCol>
+                </IonRow>
 
-                        </IonCol>
-                    </IonRow>
-                    <IonRow className="procat__row--mid">
-                        <IonCol className="procat__col--mid">
-                            <IonText class="procat__header">
-                                <h1>Productos favoritos</h1>
-                            </IonText>
-                            <IonRouterLink routerLink="/Producto-Information">
-                                <div className="Cardscategorias">
-                                    {Categorias.map(categoria => (
-                                        <IonCard key={categoria.id} className="Categorias">
-                                            <IonImg src={categoria.img} className="centered-image" />
-                                            <IonCardHeader>
-                                                <IonCardSubtitle>{categoria.nombre}</IonCardSubtitle>
-                                            </IonCardHeader>
-                                        </IonCard>
-                                    ))}
-                                </div>
-                            </IonRouterLink>
+                <IonRow className="procat__row--header">
+                    <IonCol className="procat__header--col">
+                        <IonText className="procat__header--title">Productos favoritos</IonText>
+                        <IonRouterLink routerLink='/ProductoFavorito' className="ViewMore-link">
+                            Ver más
+                        </IonRouterLink>
+                    </IonCol>
+                </IonRow>
 
-                        </IonCol>
-                    </IonRow>
-                    <IonRow className="procat__row--bottom">
-                        <IonCol className="procat__col--bottom">
-                            <IonText>
-                                <h1>Comida</h1>
-                            </IonText>
+                <IonRow className="procat__row--mid">
+                    <IonCol className="procat__col--mid">
+                        <IonRouterLink routerLink="/Producto-Information">
                             <div className="Cardscategorias">
                                 {Categorias.map(categoria => (
                                     <IonCard key={categoria.id} className="Categorias">
@@ -98,11 +91,36 @@ const ProductoCategoria: React.FC = () => {
                                     </IonCard>
                                 ))}
                             </div>
-                        </IonCol>
-                    </IonRow>
-                </IonGrid>
-            </IonContent>
-        </IonPage>
+                        </IonRouterLink>
+                    </IonCol>
+                </IonRow>
+
+                <IonRow className="procat__row--header">
+                    <IonCol className="procat__header--col">
+                        <IonText className="procat__header--title">Comida</IonText>
+                        <IonRouterLink routerLink='/MasProductos' className="ViewMore-link">
+                            Ver más
+                        </IonRouterLink>
+                    </IonCol>
+                </IonRow>
+
+                <IonRow className="procat__row--bottom">
+                    <IonCol className="procat__col--bottom">
+                        <div className="Cardscategorias">
+                            {Categorias.map(categoria => (
+                                <IonCard key={categoria.id} className="Categorias">
+                                    <IonImg src={categoria.img} className="centered-image" />
+                                    <IonCardHeader>
+                                        <IonCardSubtitle>{categoria.nombre}</IonCardSubtitle>
+                                    </IonCardHeader>
+                                </IonCard>
+                            ))}
+                        </div>
+                    </IonCol>
+                </IonRow>
+            </IonGrid>
+        </IonContent>
+    </IonPage>
     );
 }
 

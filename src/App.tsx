@@ -7,20 +7,28 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
-  setupIonicReact
+  setupIonicReact,
+  IonFab,
+  IonFabButton,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, home, person, search, square, triangle } from 'ionicons/icons';
+import { home, person, search, addCircle, bagAdd, add } from 'ionicons/icons';
+
+// Define your routes here
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Buscador/Tab2';
 import Tab3 from './pages/Tab3';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import EditarPerfil from './pages/EditarPerfil/EditarPerfil';
 import ProductoCategoria from './pages/producto-categoria/ProductoCategoria';
-// Define your routes here
 import ProductInfo from './pages/ProductInfo/productInfo';
+import CreateProduct from './pages/CrearProducto/CreateProduct';
+import EditarPerfil from './pages/EditarPerfil/EditarPerfil';
 import Perfil from './pages/Perfil/perfil';
+import MasProductos from './pages/VerMas/MasProductos';
+import MisProductos from './pages/MisProductos/MisProductos';
+import Verify from './pages/register/Verify';
+import ProductoFavorito from './pages/ProductFav/ProductoFav';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -51,8 +59,6 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Verify from './pages/register/Verify';
-
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -84,8 +90,17 @@ const App: React.FC = () => (
           <Route exact path="/ProductoCategoria">
             <ProductoCategoria />
           </Route>
+          <Route exact path="/MisProductos">
+            <MisProductos />
+          </Route>
           <Route exact path="/">
             <Redirect to="/login" />
+          </Route>
+          <Route exact path="/Agregar-Producto">
+            <CreateProduct />
+          </Route>
+          <Route exact path="/MasProductos">
+            <MasProductos />
           </Route>
           <Route exact path="/Editar-Perfil">
             <EditarPerfil />
@@ -93,15 +108,26 @@ const App: React.FC = () => (
           <Route exact path="/Perfil">
             <Perfil />
           </Route>
+          <Route exact path="/ProductoFavorito">
+            <ProductoFavorito />
+          </Route>
+
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+
+         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
             <IonIcon aria-hidden="true" icon={home} />
           </IonTabButton>
+
           <IonTabButton tab="tab2" href="/tab2">
             <IonIcon aria-hidden="true" icon={search} />
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/Perfil">
+
+          <IonTabButton tab="add" href="/Agregar-Producto" className="center-tab-button">
+            <IonIcon icon={add} />
+          </IonTabButton>
+
+          <IonTabButton tab="perfil" href="/Perfil">
             <IonIcon aria-hidden="true" icon={person} />
           </IonTabButton>
         </IonTabBar>

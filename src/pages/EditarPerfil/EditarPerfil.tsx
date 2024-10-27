@@ -2,15 +2,17 @@ import React, { useState, useRef } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import './EditarPerfil.css';
+import BackButton from '../../components/backBtn/BackButton';
 
 const EditarPerfil: React.FC = () => {
     const history = useHistory();
     
-    const [nombre, setNombre] = useState<string>('NombreUsuario');
-    const [descripcion, setDescripcion] = useState<string>('Esta es la descripción del usuario.');
+    const [nombre, setNombre] = useState<string>('');
+    const [descripcion, setDescripcion] = useState<string>('');
     const [image, setImage] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const textareaRef = useRef<HTMLIonTextareaElement>(null);
+    const [number, setNumber] = useState<string>('');
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -23,30 +25,15 @@ const EditarPerfil: React.FC = () => {
     const handleDescriptionChange = (event: CustomEvent) => {
         const textarea = event.target as HTMLIonTextareaElement;
         setDescripcion(textarea.value || '');
-        adjustTextareaHeight();
-    };
-
-    const adjustTextareaHeight = () => {
-        if (textareaRef.current) {
-            const textarea = textareaRef.current;
-            textarea.style.height = 'auto';
-            textarea.style.height = `${textarea.scrollHeight}px`;
-        }
     };
 
     const handleSaveChanges = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
-            nombre,
-            descripcion,
-            image
-        });
+        console.log({ nombre, descripcion, image });
         history.push('/Perfil');
     };
 
     const handleCancelChanges = () => {
-        setNombre('NombreUsuario');
-        setDescripcion('Esta es la descripción del usuario.');
         setImage(null);
         setImagePreview(null);
         history.push('/tab3');
@@ -56,63 +43,71 @@ const EditarPerfil: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Editar Perfil</IonTitle>
+                    <BackButton />
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
                 <form onSubmit={handleSaveChanges} className="form">
-
-                <IonItem className="form-group">
+                    <IonItem className="form-group">
                         <IonLabel position="stacked">Imagen de Perfil:</IonLabel>
-                        <input type="file" id="image" onChange={handleImageChange} />
+                        <input type="file" onChange={handleImageChange} className="file-input" />
                     </IonItem>
-
                     {imagePreview && (
-                        <IonItem className="form-group">
+                        <IonItem className="form-group image-preview">
                             <IonImg src={imagePreview} alt="Vista previa de la imagen de perfil" />
                         </IonItem>
                     )}
                     
                     <IonItem className="form-group">
-                        <IonLabel position="stacked">Nombre de Usuario:</IonLabel>
+                        <IonLabel position="stacked">Nombre de Usuario</IonLabel>
                         <IonInput
                             type="text"
                             value={nombre}
                             onIonChange={(e) => setNombre(e.detail.value!)}
+                            placeholder="Ingresa tu nombre"
                         />
                     </IonItem>
 
                     <IonItem className="form-group">
-                        <IonLabel position="stacked">Descripción:</IonLabel>
+                        <IonLabel position="stacked">Numero</IonLabel>
+                        <IonInput
+                            type="number"
+                            value={number}
+                            onIonChange={(e) => setNumber(e.detail.value!)}
+                            placeholder="Ingresa tu numero"
+                        />
+                    </IonItem>
+
+                    <IonItem className="form-group">
+                        <IonLabel position="stacked">Descripción</IonLabel>
                         <IonTextarea
                             ref={textareaRef}
                             value={descripcion}
                             onIonInput={handleDescriptionChange}
+                            placeholder="Describe algo sobre ti"
                             autoGrow={true}
-                            className="auto-expand"
+                            counter={true}
+                            maxlength={100}
                         />
                     </IonItem>
 
                     <div className="button-container">
-                    <IonButton 
-                        expand="block" 
-                        type="submit" 
-                        className="save-btn" 
-                        fill="solid"
-                        color="#4CAF50"
-                    >
-                        Guardar cambios
-                    </IonButton>
-                    <IonButton 
-                        expand="block" 
-                        color="#f44336"
-                        className="cancel-btn" 
-                        fill="solid"
-                        onClick={handleCancelChanges}
-                    >
-                        Deshacer cambios
-                    </IonButton>
-
+                        <IonButton 
+                            expand="block" 
+                            type="submit" 
+                            className="save-btn"
+                            fill="solid"
+                        >
+                            Guardar cambios
+                        </IonButton>
+                        <IonButton 
+                            expand="block"
+                            className="cancel-btn"
+                            fill="solid"
+                            onClick={handleCancelChanges}
+                        >
+                            Deshacer cambios
+                        </IonButton>
                     </div>
                 </form>
             </IonContent>

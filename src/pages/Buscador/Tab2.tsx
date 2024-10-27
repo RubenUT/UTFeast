@@ -23,11 +23,6 @@ function Tab2() {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent>
         <IonSearchbar onIonInput={handleInput}></IonSearchbar>
         <IonList>

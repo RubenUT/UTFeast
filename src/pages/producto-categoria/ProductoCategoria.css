@@ -1,20 +1,3 @@
-.procat {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    color: black;
-}
-
-.procat__row--top {
-    height: 20%;
-}
-
-
-.procat__row--mid,
-.procat__row--bottom {
-    height: 40%;
-}
-
 .Cardscategorias {
     display: flex;
     flex-direction: row;
@@ -26,6 +9,102 @@
 
 .Categorias {
     min-width: 120px;
-    margin-right: 10px;
-    flex-shrink: 1%;
+    max-width: 150px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; 
+}
+
+.Categorias:hover {
+    transform: scale(1.05);
+}
+
+.centered-image {
+    height: 120px;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+}
+
+.IonCardHeader {
+    text-align: center;
+    padding: 10px;
+}
+
+.procat__header {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.procat__top--col {
+    width: 100%;
+    
+}
+
+.IonSearchbar {
+    margin-top: 20px;
+    width: 100%;
+}
+  .custom-searchbar{
+    --background: #f7f7f7;
+    --border-radius: 15px;
+    --box-shadow: none;
+    --color: #4B5563;
+    --placeholder-color: #9ca3af;
+    --icon-color: #1f2937;
+    border: 1px solid #e5e7eb;
+    padding-left: 10px;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 75px;
+    border-radius: 20px;
+    
+}
+
+.custom-searchbar .searchbar-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding-left: 10px;
+}
+
+.custom-searchbar ion-icon {
+    margin-right: 8px;
+}
+
+.custom-searchbar .searchbar-clear-icon {
+    margin-right: 5px;
+}
+.procat__row--header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.procat__header--col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.procat__header--title {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #000;
+}
+
+.ViewMore-link {
+    color: #019882;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
 }

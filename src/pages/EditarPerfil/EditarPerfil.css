@@ -1,73 +1,43 @@
-.editar-perfil-container {
-    background-color: #f8f8f8;
-    color: #000000;
+.form {
+    max-width: 500px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    min-height: calc(100vh - 60px);
-    padding-bottom: 60px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header {
-    text-align: center;
+.form-group {
     margin-bottom: 20px;
 }
 
-.config-list {
+.file-input {
+    padding-top: 8px;
+}
+
+.image-preview ion-img {
     width: 100%;
-    max-width: 400px;
-    margin: 20px 0;
-}
-
-.config-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.config-item label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.config-item input {
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
-}
-
-.button-group {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 400px;
-}
-
-.save-btn,
-.cancel-btn {
-    width: 48%;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.save-btn {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.cancel-btn {
-    background-color: #f44336;
-    color: white;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
 }
 
 .button-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    gap: 10px;
 }
 
 .save-btn, .cancel-btn {
+    --background: #019882;
+    font-weight: bold;
+    color: white;
+    --border-radius: 8px;
     flex: 1;
-    margin: 0 5px;
+    padding: 10px;
+}
+
+.cancel-btn {
+    --background: #e74c3c;
 }

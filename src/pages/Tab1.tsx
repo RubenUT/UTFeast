@@ -1,6 +1,7 @@
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonicSlides, IonGrid, IonRow, IonCol, IonImg, IonText, IonAvatar, IonItem, IonRouterLink } from '@ionic/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation } from 'swiper/modules';
+import { useState } from 'react';
 import './Tab1.css';
 
 import 'swiper/css';
@@ -11,8 +12,10 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/zoom';
 import '@ionic/react/css/ionic-swiper.css';
 import { Route } from 'react-router';
+import NoInternetConnection from '../components/NoInternet/NoInternetConection';
 
 const Tab1: React.FC = () => {
+  const [noInternet, setNoInternet] = useState(false);
   const slides = [
     {
       id: 1,
@@ -107,6 +110,10 @@ const Tab1: React.FC = () => {
     }
   ]
 
+  if (noInternet) {
+    return <NoInternetConnection />;
+  }
+
   return (
     <IonPage>
       <IonContent>
@@ -132,7 +139,9 @@ const Tab1: React.FC = () => {
               >
                 {slides.map(slide => (
                   <SwiperSlide key={slide.id}>
-                    <IonImg src={slide.url} alt={`Slide ${slide.id}`} />
+                    <div className="fixed-size-container">
+                    <IonImg src={slide.url} alt={`Slide ${slide.id}`} className="menu__swiper-img"/>
+                    </div>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -143,7 +152,7 @@ const Tab1: React.FC = () => {
               <IonRow>
                 <IonCol>
                   <IonText>
-                    <h2>Explora las categorias</h2>
+                    <h2 className='title1'>Explora las categorias</h2>
                   </IonText>
                 </IonCol>
               </IonRow>
@@ -151,8 +160,8 @@ const Tab1: React.FC = () => {
               <div className='menu__carousel'>
                 {categorias.map((categoria) => (
                   <div key={categoria.id} className="menu_carousel--item">
-
-                    <IonRouterLink routerLink='/ProductoCategoria' style={{textDecoration: 'none'}}>
+                    
+                    <IonRouterLink routerLink='/ProductoCategoria' className='NombreProduct'>
                       <IonAvatar>
                         <img src={categoria.img} />
                       </IonAvatar>
@@ -170,7 +179,7 @@ const Tab1: React.FC = () => {
               <IonRow>
                 <IonCol>
                   <IonText>
-                    <h2>Nuestros vendedores</h2>
+                    <h2 className='title1'>Nuestros vendedores</h2>
                   </IonText>
                 </IonCol>
               </IonRow>
