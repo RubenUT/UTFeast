@@ -48,43 +48,57 @@ const EditarPerfil: React.FC = () => {
             </IonHeader>
             <IonContent className="ion-padding">
                 <form onSubmit={handleSaveChanges} className="form">
-                    <IonItem className="form-group">
-                        <IonLabel position="stacked">Imagen de Perfil:</IonLabel>
-                        <input type="file" onChange={handleImageChange} className="file-input" />
+                    <IonItem className="form-group botonimg"  lines="none">
+                    <div className="button-container">
+                        <label htmlFor="file-input" className="custom-file-label">
+                            Selecciona una imagen
+                        </label>
+                        <input 
+                            type="file" 
+                            id="file-input" 
+                            onChange={handleImageChange} 
+                            className="file-input-hidden" 
+                        />
+                    </div>
                     </IonItem>
                     {imagePreview && (
-                        <IonItem className="form-group image-preview">
-                            <IonImg src={imagePreview} alt="Vista previa de la imagen de perfil" />
+                        <IonItem className="form-group"  lines="none">
+                            <div className="image-preview-wrapper">
+                                <IonImg src={imagePreview} alt="Vista previa de la imagen"/>
+                            </div>
                         </IonItem>
                     )}
                     
-                    <IonItem className="form-group">
-                        <IonLabel position="stacked">Nombre de Usuario</IonLabel>
+                    <IonItem className="form-group input-container"  lines="none">
                         <IonInput
                             type="text"
                             value={nombre}
                             onIonChange={(e) => setNombre(e.detail.value!)}
                             placeholder="Ingresa tu nombre"
+                            label="Nombre"
+                            labelPlacement="floating"
                         />
                     </IonItem>
 
-                    <IonItem className="form-group">
-                        <IonLabel position="stacked">Numero</IonLabel>
+                    <IonItem className="form-group input-container"  lines="none">
                         <IonInput
                             type="number"
                             value={number}
                             onIonChange={(e) => setNumber(e.detail.value!)}
                             placeholder="Ingresa tu numero"
+                            label="Numero"
+                            labelPlacement="floating"
                         />
                     </IonItem>
 
-                    <IonItem className="form-group">
-                        <IonLabel position="stacked">Descripción</IonLabel>
+                    <IonItem className="form-group input-container"  lines="none">
                         <IonTextarea
                             ref={textareaRef}
                             value={descripcion}
                             onIonInput={handleDescriptionChange}
                             placeholder="Describe algo sobre ti"
+                            label="Descripcion"
+                            labelPlacement="floating"
                             autoGrow={true}
                             counter={true}
                             maxlength={100}
@@ -96,7 +110,6 @@ const EditarPerfil: React.FC = () => {
                             expand="block" 
                             type="submit" 
                             className="save-btn"
-                            fill="solid"
                         >
                             Guardar cambios
                         </IonButton>

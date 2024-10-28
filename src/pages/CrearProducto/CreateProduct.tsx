@@ -6,6 +6,7 @@ const CreateProduct: React.FC = () => {
     const [image, setImage] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [price, setPrice] = useState<string>('');
+    const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const textareaRef = useRef<HTMLIonTextareaElement>(null);
 
@@ -19,43 +20,66 @@ const CreateProduct: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ image, price, description });
+        console.log({ image, name , price, description });
     };
 
-    return (
+    return ( 
         <IonPage>
             <IonContent className="ion-padding content" scrollY={true} fullscreen={true}>
             <h1 className='title'>Agrega el Producto</h1>
                 <form onSubmit={handleSubmit} className="form">
-                    <IonItem className="form-group">
-                        <IonLabel position="stacked">Imagen</IonLabel>
-                        <input type="file" onChange={handleImageChange} className="file-input" />
+                    <IonItem className="form-group boton-imagen"  lines="none">
+                    <div className="button-container">
+                        <label htmlFor="file-input" className="custom-file-label">
+                            Selecciona una imagen
+                        </label>
+                        <input 
+                            type="file" 
+                            id="file-input" 
+                            onChange={handleImageChange} 
+                            className="file-input-hidden" 
+                        />
+                    </div>
                     </IonItem>
                     {imagePreview && (
-                        <IonItem className="form-group image-preview">
-                            <IonImg src={imagePreview} alt="Vista previa de la imagen" />
+                        <IonItem className="form-group"  lines="none">
+                            <div className="image-preview-wrapper">
+                                <IonImg src={imagePreview} alt="Vista previa de la imagen"/>
+                            </div>
                         </IonItem>
                     )}
-                    <IonItem className="form-group">
-                        <IonLabel position="stacked">Precio</IonLabel>
+                    <IonItem className="form-group input-container"  lines="none">
+                        <IonInput
+                            type="text"
+                            value={name}
+                            onIonChange={(e) => setName(e.detail.value!)}
+                            placeholder="Ingresa el nombre del producto"
+                            label="Nombre"
+                            labelPlacement="floating"
+
+                        />
+                    </IonItem>
+                    <IonItem className="form-group input-container"  lines="none">
                         <IonInput
                             type="number"
                             value={price}
                             onIonChange={(e) => setPrice(e.detail.value!)}
                             placeholder="Ingresa el precio"
-                            fill="outline"
+                            label="Precio"
+                            labelPlacement="floating"
                         />
                     </IonItem>
-                    <IonItem className="form-group">
-                        <IonLabel position="stacked">Descripción</IonLabel>
-                        <IonTextarea
+                    <IonItem className="form-group input-container"  lines="none">
+                        <IonTextarea 
                             ref={textareaRef}
                             value={description}
                             onIonInput={(e) => setDescription(e.detail.value!)}
                             placeholder="Describe el producto"
-                            fill="outline"
+                            label="Descripcion"
+                            labelPlacement="floating"
                             counter={true}
                             maxlength={200}
+                            autoGrow={true}
                         />
                     </IonItem>
                     <IonButton expand="block" type="submit" className="submit-button">
