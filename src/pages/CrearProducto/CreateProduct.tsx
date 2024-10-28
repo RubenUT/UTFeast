@@ -1,26 +1,27 @@
 import React, { useState, useRef } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
 import './CreateProduct.css';
+import { camera } from 'ionicons/icons';
 
 const CreateProduct: React.FC = () => {
-    const [image, setImage] = useState<File | null>(null);
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
-    const [price, setPrice] = useState<string>('');
-    const [name, setName] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const textareaRef = useRef<HTMLIonTextareaElement>(null);
+    const [imageProduct, setImageProduct] = useState<File | null>(null);
+    const [imagePreviewProduct, setImagePreviewProduct] = useState<string | null>(null);
+    const [priceProduct, setPriceProduct] = useState<string>('');
+    const [nameProduct, setNameProduct] = useState<string>('');
+    const [descriptionProduct, setDescriptionProduct] = useState<string>('');
+    const textareaRefProduct = useRef<HTMLIonTextareaElement>(null);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
-            setImage(file);
-            setImagePreview(URL.createObjectURL(file));
+            setImageProduct(file);
+            setImagePreviewProduct(URL.createObjectURL(file));
         }
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ image, name , price, description });
+        console.log({ imageProduct, nameProduct , priceProduct, descriptionProduct });
     };
 
     return ( 
@@ -31,7 +32,8 @@ const CreateProduct: React.FC = () => {
                     <IonItem className="form-group boton-imagen"  lines="none">
                     <div className="button-container">
                         <label htmlFor="file-input" className="custom-file-label">
-                            Selecciona una imagen
+                            <IonIcon aria-hidden="true" icon={camera} className="custom-icon" />
+                            <span className="custom-file-text">Selecciona una imagen</span>
                         </label>
                         <input 
                             type="file" 
@@ -41,20 +43,20 @@ const CreateProduct: React.FC = () => {
                         />
                     </div>
                     </IonItem>
-                    {imagePreview && (
+                    {imagePreviewProduct && (
                         <IonItem className="form-group"  lines="none">
                             <div className="image-preview-wrapper">
-                                <IonImg src={imagePreview} alt="Vista previa de la imagen"/>
+                                <IonImg src={imagePreviewProduct} alt="Vista previa de la imagen"  className="image-preview"/>
                             </div>
                         </IonItem>
                     )}
                     <IonItem className="form-group input-container"  lines="none">
                         <IonInput
                             type="text"
-                            value={name}
-                            onIonChange={(e) => setName(e.detail.value!)}
+                            value={nameProduct}
+                            onIonChange={(e) => setNameProduct(e.detail.value!)}
                             placeholder="Ingresa el nombre del producto"
-                            label="Nombre"
+                            label="Nombre:"
                             labelPlacement="floating"
 
                         />
@@ -62,20 +64,20 @@ const CreateProduct: React.FC = () => {
                     <IonItem className="form-group input-container"  lines="none">
                         <IonInput
                             type="number"
-                            value={price}
-                            onIonChange={(e) => setPrice(e.detail.value!)}
+                            value={priceProduct}
+                            onIonChange={(e) => setPriceProduct(e.detail.value!)}
                             placeholder="Ingresa el precio"
-                            label="Precio"
+                            label="Precio:"
                             labelPlacement="floating"
                         />
                     </IonItem>
                     <IonItem className="form-group input-container"  lines="none">
                         <IonTextarea 
-                            ref={textareaRef}
-                            value={description}
-                            onIonInput={(e) => setDescription(e.detail.value!)}
+                            ref={textareaRefProduct}
+                            value={descriptionProduct}
+                            onIonInput={(e) => setDescriptionProduct(e.detail.value!)}
                             placeholder="Describe el producto"
-                            label="Descripcion"
+                            label="Descripcion:"
                             labelPlacement="floating"
                             counter={true}
                             maxlength={200}

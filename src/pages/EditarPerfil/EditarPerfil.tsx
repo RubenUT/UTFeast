@@ -1,41 +1,42 @@
 import React, { useState, useRef } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import './EditarPerfil.css';
 import BackButton from '../../components/backBtn/BackButton';
+import { camera } from 'ionicons/icons';
 
 const EditarPerfil: React.FC = () => {
     const history = useHistory();
     
-    const [nombre, setNombre] = useState<string>('');
-    const [descripcion, setDescripcion] = useState<string>('');
-    const [image, setImage] = useState<File | null>(null);
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
-    const textareaRef = useRef<HTMLIonTextareaElement>(null);
-    const [number, setNumber] = useState<string>('');
+    const [nombrePerfil, setNombrePerfil] = useState<string>('');
+    const [descripcionPerfil, setDescripcionPerfil] = useState<string>('');
+    const [imagePerfil, setImagePerfil] = useState<File | null>(null);
+    const [imagePreviewPerfil, setImagePreviewPerfil] = useState<string | null>(null);
+    const textareaRefPerfil = useRef<HTMLIonTextareaElement>(null);
+    const [numberPerfil, setNumberPerfil] = useState<string>('');
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
-            setImage(file);
-            setImagePreview(URL.createObjectURL(file));
+            setImagePerfil(file);
+            setImagePreviewPerfil(URL.createObjectURL(file));
         }
     };
 
     const handleDescriptionChange = (event: CustomEvent) => {
         const textarea = event.target as HTMLIonTextareaElement;
-        setDescripcion(textarea.value || '');
+        setDescripcionPerfil(textarea.value || '');
     };
 
     const handleSaveChanges = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ nombre, descripcion, image });
+        console.log({ nombrePerfil, descripcionPerfil, imagePerfil });
         history.push('/Perfil');
     };
 
     const handleCancelChanges = () => {
-        setImage(null);
-        setImagePreview(null);
+        setImagePerfil(null);
+        setImagePreviewPerfil(null);
         history.push('/tab3');
     };
 
@@ -51,7 +52,8 @@ const EditarPerfil: React.FC = () => {
                     <IonItem className="form-group botonimg"  lines="none">
                     <div className="button-container">
                         <label htmlFor="file-input" className="custom-file-label">
-                            Selecciona una imagen
+                            <IonIcon aria-hidden="true" icon={camera} className="custom-icon" />
+                            <span className="custom-file-text">Selecciona una imagen</span>
                         </label>
                         <input 
                             type="file" 
@@ -61,10 +63,10 @@ const EditarPerfil: React.FC = () => {
                         />
                     </div>
                     </IonItem>
-                    {imagePreview && (
+                    {imagePreviewPerfil && (
                         <IonItem className="form-group"  lines="none">
                             <div className="image-preview-wrapper">
-                                <IonImg src={imagePreview} alt="Vista previa de la imagen"/>
+                                <IonImg src={imagePreviewPerfil} alt="Vista previa de la imagen" className="image-preview"/>
                             </div>
                         </IonItem>
                     )}
@@ -72,10 +74,10 @@ const EditarPerfil: React.FC = () => {
                     <IonItem className="form-group input-container"  lines="none">
                         <IonInput
                             type="text"
-                            value={nombre}
-                            onIonChange={(e) => setNombre(e.detail.value!)}
+                            value={nombrePerfil}
+                            onIonChange={(e) => setNombrePerfil(e.detail.value!)}
                             placeholder="Ingresa tu nombre"
-                            label="Nombre"
+                            label="Nombre:"
                             labelPlacement="floating"
                         />
                     </IonItem>
@@ -83,21 +85,21 @@ const EditarPerfil: React.FC = () => {
                     <IonItem className="form-group input-container"  lines="none">
                         <IonInput
                             type="number"
-                            value={number}
-                            onIonChange={(e) => setNumber(e.detail.value!)}
+                            value={numberPerfil}
+                            onIonChange={(e) => setNumberPerfil(e.detail.value!)}
                             placeholder="Ingresa tu numero"
-                            label="Numero"
+                            label="Numero:"
                             labelPlacement="floating"
                         />
                     </IonItem>
 
                     <IonItem className="form-group input-container"  lines="none">
                         <IonTextarea
-                            ref={textareaRef}
-                            value={descripcion}
+                            ref={textareaRefPerfil}
+                            value={descripcionPerfil}
                             onIonInput={handleDescriptionChange}
                             placeholder="Describe algo sobre ti"
-                            label="Descripcion"
+                            label="Descripcion:"
                             labelPlacement="floating"
                             autoGrow={true}
                             counter={true}
