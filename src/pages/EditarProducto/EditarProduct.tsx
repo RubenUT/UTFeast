@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
-import './CreateProduct.css';
+import './EditarProduct.css';
 import { camera } from 'ionicons/icons';
+import BackButton from '../../components/backBtn/BackButton';
 
-const CreateProduct: React.FC = () => {
+const EditProduct: React.FC = () => {
     const [imageProduct, setImageProduct] = useState<File | null>(null);
     const [imagePreviewProduct, setImagePreviewProduct] = useState<string | null>(null);
     const [priceProduct, setPriceProduct] = useState<string>('');
@@ -11,13 +12,16 @@ const CreateProduct: React.FC = () => {
     const [descriptionProduct, setDescriptionProduct] = useState<string>('');
     const textareaRefProduct = useRef<HTMLIonTextareaElement>(null);
 
+
     useEffect(() => {
+        return () => {
             setImageProduct(null);
             setImagePreviewProduct(null);
             setPriceProduct('');
             setNameProduct('');
             setDescriptionProduct('');
-    }, []);
+        };
+    }, []);    
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -29,36 +33,39 @@ const CreateProduct: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ imageProduct, nameProduct , priceProduct, descriptionProduct });
+        console.log({ imageProduct, nameProduct, priceProduct, descriptionProduct });
     };
 
-    return ( 
+    return (
         <IonPage>
-            <IonContent className="ion-padding contentCreateProduct" scrollY={true} fullscreen={true}>
-                <h1 className='titleCreateProduct'>Agrega el Producto</h1>
-                <form onSubmit={handleSubmit} className="formCreateProduct">
-                    <IonItem className="form-groupCreateProduct button-imageCreateProduct" lines="none">
-                        <div className="button-containerCreateProduct">
-                            <label htmlFor="file-input" className="custom-file-labelCreateProduct">
-                                <IonIcon aria-hidden="true" icon={camera} className="custom-iconCreateProduct" />
-                                <span className="custom-file-textCreateProduct">Selecciona una imagen</span>
+            <IonToolbar>
+                <BackButton />
+            </IonToolbar>
+            <IonContent className="ion-padding contentEditProduct" scrollY={true} fullscreen={true}>
+                <h1 className='titleEditProduct'>Editar Producto</h1>
+                <form onSubmit={handleSubmit} className="formEditProduct">
+                    <IonItem className="form-groupEditProduct button-imageEditProduct" lines="none">
+                        <div className="button-containerEditProduct">
+                            <label htmlFor="file-input" className="custom-file-labelEditProduct">
+                                <IonIcon aria-hidden="true" icon={camera} className="custom-iconEditProduct" />
+                                <span className="custom-file-textEditProduct">Selecciona una imagen</span>
                             </label>
-                            <input 
-                                type="file" 
-                                id="file-input" 
-                                onChange={handleImageChange} 
-                                className="file-input-hiddenCreateProduct" 
+                            <input
+                                type="file"
+                                id="file-input"
+                                onChange={handleImageChange}
+                                className="file-input-hiddenEditProduct"
                             />
                         </div>
                     </IonItem>
                     {imagePreviewProduct && (
-                        <IonItem className="form-groupCreateProduct" lines="none">
-                            <div className="image-preview-wrapperCreateProduct">
-                                <IonImg src={imagePreviewProduct} alt="Vista previa de la imagen" className="image-previewCreateProduct"/>
+                        <IonItem className="form-groupEditProduct" lines="none">
+                            <div className="image-preview-wrapperEditProduct">
+                                <IonImg src={imagePreviewProduct} alt="Vista previa de la imagen" className="image-previewEditProduct" />
                             </div>
                         </IonItem>
                     )}
-                    <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
+                    <IonItem className="form-groupEditProduct input-containerEditProduct" lines="none">
                         <IonInput
                             type="text"
                             value={nameProduct}
@@ -68,7 +75,7 @@ const CreateProduct: React.FC = () => {
                             labelPlacement="floating"
                         />
                     </IonItem>
-                    <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
+                    <IonItem className="form-groupEditProduct input-containerEditProduct" lines="none">
                         <IonInput
                             type="number"
                             value={priceProduct}
@@ -78,8 +85,8 @@ const CreateProduct: React.FC = () => {
                             labelPlacement="floating"
                         />
                     </IonItem>
-                    <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
-                        <IonTextarea 
+                    <IonItem className="form-groupEditProduct input-containerEditProduct" lines="none">
+                        <IonTextarea
                             ref={textareaRefProduct}
                             value={descriptionProduct}
                             onIonInput={(e) => setDescriptionProduct(e.detail.value!)}
@@ -91,8 +98,8 @@ const CreateProduct: React.FC = () => {
                             autoGrow={true}
                         />
                     </IonItem>
-                    <IonButton expand="block" type="submit" className="submit-buttonCreateProduct">
-                        Agregar Producto
+                    <IonButton expand="block" type="submit" className="submit-buttonEditProduct">
+                        Guardar Cambios
                     </IonButton>
                 </form>
             </IonContent>
@@ -100,4 +107,4 @@ const CreateProduct: React.FC = () => {
     );
 };
 
-export default CreateProduct;
+export default EditProduct;

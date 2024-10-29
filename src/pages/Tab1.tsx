@@ -183,7 +183,8 @@ const Tab1: React.FC = () => {
                   </IonText>
                 </IonCol>
               </IonRow>
-
+              
+              <IonRouterLink routerLink='/PerfilUsers' className='NombreProduct'>
               <div className='menu__vendedores'>
                 {vendedores.map((vendedor) => (
                   <div key={vendedor.id} className="menu_vendedores--item">
@@ -195,6 +196,7 @@ const Tab1: React.FC = () => {
                   </div>
                 ))}
               </div>
+              </IonRouterLink>
 
             </IonCol>
           </IonRow>

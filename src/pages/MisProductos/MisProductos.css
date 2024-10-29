@@ -1,4 +1,4 @@
-.results-text {
+.results-textMisProductos {
     font-size: 18px;
     font-weight: bold;
     color: #333;
@@ -6,14 +6,14 @@
     text-align: center;
 }
 
-.product-card-col {
+.product-card-colMisProductos {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.product-card {
+.product-cardMisProductos {
     width: 100%;
     max-width: 160px;
     padding: 15px;
@@ -24,14 +24,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative; /* Para posicionar el icono de edición */
     transition: transform 0.2s ease-in-out;
 }
 
-.product-card:hover {
+.product-cardMisProductos:hover {
     transform: scale(1.05);
 }
 
-.product-image {
+.product-imageMisProductos {
     width: 100%;
     max-width: 120px;
     max-height: 120px;
@@ -40,7 +41,7 @@
     margin-bottom: 10px;
 }
 
-.product-name {
+.product-nameMisProductos {
     font-size: 14px;
     font-weight: 600;
     color: #333;
@@ -50,8 +51,38 @@
     text-overflow: ellipsis;
 }
 
-.product-price {
+.product-priceMisProductos {
     font-size: 16px;
     font-weight: bold;
     color: #019882;
+}
+
+.edit-icon-linkMisProductos {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1; /* Asegura que el icono esté por encima del contenido de la card */
+}
+
+.icon-pencilMisProductos {
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #019882;
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-pencilMisProductos:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.product-linkMisProductos {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }

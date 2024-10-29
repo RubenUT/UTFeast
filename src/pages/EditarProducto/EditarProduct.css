@@ -1,12 +1,12 @@
-.contentCreateProduct {
+.contentEditProduct {
     scroll-padding-bottom: 100px;
 }
 
-.file-inputCreateProduct {
+.file-inputEditProduct {
     margin-top: 8px;
 }
 
-.image-preview-wrapperCreateProduct {
+.image-preview-wrapperEditProduct {
     border-radius: 20px;
     overflow: hidden;
     display: inline-block;
@@ -14,34 +14,34 @@
     height: 252px;
 }
 
-.image-previewCreateProduct {
+.image-previewEditProduct {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.submit-buttonCreateProduct {
+.submit-buttonEditProduct {
     margin-top: 20px;
     --border-radius: 8px;
     font-weight: bold;
     color: white;
 }
 
-.form-groupCreateProduct {
+.form-groupEditProduct {
     margin-bottom: 20px;
 }
 
-.titleCreateProduct {
+.titleEditProduct {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-.file-input-hiddenCreateProduct {
+.file-input-hiddenEditProduct {
     display: none;
 }
 
-.custom-file-labelCreateProduct {
+.custom-file-labelEditProduct {
     display: inline-block;
     padding: 10px 20px;
     background-color: #019882;
@@ -53,11 +53,11 @@
     justify-content: center;
 }
 
-.custom-file-labelCreateProduct:hover {
+.custom-file-labelEditProduct:hover {
     background-color: #0056b3;
 }
 
-.input-containerCreateProduct {
+.input-containerEditProduct {
     border: 1px solid #ccc;
     border-radius: 6px;
     margin-bottom: 20px;
@@ -65,17 +65,17 @@
     transition: all 0.2s ease;
 }
 
-.input-containerCreateProduct:hover {
+.input-containerEditProduct:hover {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
     border-color: #888;
 }
 
-.input-containerCreateProduct:focus-within {
+.input-containerEditProduct:focus-within {
     border-color: #4CAF50;
     box-shadow: 0px 0px 0px 2px rgba(76, 175, 80, 0.2);
 }
 
-.button-containerCreateProduct {
+.button-containerEditProduct {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@
     margin-top: 20px;
 }
 
-.custom-iconCreateProduct {
+.custom-iconEditProduct {
     font-size: 20px;
     margin-right: 10px;
-} 
+}

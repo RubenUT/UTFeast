@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import './EditarPerfil.css';
@@ -15,6 +15,15 @@ const EditarPerfil: React.FC = () => {
     const textareaRefPerfil = useRef<HTMLIonTextareaElement>(null);
     const [numberPerfil, setNumberPerfil] = useState<string>('');
 
+
+    useEffect(() => {
+            setImagePerfil(null);
+            setImagePreviewPerfil(null);
+            setNumberPerfil('');
+            setNombrePerfil('');
+            setDescripcionPerfil('');
+    }, []);
+    
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];

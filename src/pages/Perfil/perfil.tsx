@@ -31,7 +31,7 @@ const Perfil = () => {
                 <p>Mi WhatsApp</p>
               </div>
             </IonRouterLink>
-            <IonRouterLink routerLink='/help' className="perfil-option">
+            <IonRouterLink routerLink='/SobreLaEmpresa' className="perfil-option">
               <div className="option-content">
                 <p>Sobre la empresa</p>
               </div>

@@ -29,6 +29,10 @@ import MasProductos from './pages/VerMas/MasProductos';
 import MisProductos from './pages/MisProductos/MisProductos';
 import Verify from './pages/register/Verify';
 import ProductoFavorito from './pages/ProductFav/ProductoFav';
+import PerfilUsers from './pages/PerfilUsers/PerfilUsers';
+import ProductosVendedor from './pages/ProductosVendedor/ProductosVendedor';
+import EditProduct from './pages/EditarProducto/EditarProduct';
+import CompanyInfo from './pages/SobreLaEmpresa/EmpresaInfo';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -110,6 +114,18 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/ProductoFavorito">
             <ProductoFavorito />
+          </Route>
+          <Route exact path="/PerfilUsers">
+            <PerfilUsers />
+          </Route>
+          <Route exact path="/ProductosVendedor">
+            <ProductosVendedor />
+          </Route>
+          <Route exact path="/EditarProducto">
+            <EditProduct />
+          </Route>
+          <Route exact path="/SobreLaEmpresa">
+            <CompanyInfo />
           </Route>
 
         </IonRouterOutlet>
