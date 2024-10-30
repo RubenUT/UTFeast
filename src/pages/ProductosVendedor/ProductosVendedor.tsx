@@ -1,4 +1,4 @@
-import { IonContent, IonGrid, IonPage, IonRow, IonCol, IonText, IonImg, IonToolbar, IonRouterLink } from '@ionic/react';
+import { IonContent, IonGrid, IonPage, IonRow, IonCol, IonText, IonImg, IonToolbar } from '@ionic/react';
 import './ProductosVendedor.css';
 import BackButton from '../../components/backBtn/BackButton';
 
@@ -19,7 +19,6 @@ const ProductosVendedor: React.FC = () => {
         </IonToolbar>
       <IonContent className="ion-padding">
         <IonText className="results-text"> {productsvendedor.length} Productos </IonText>
-        <IonRouterLink routerLink='/Producto-Information'>
         <IonGrid>
           <IonRow>
             {productsvendedor.map((productsvendedor) => (
@@ -33,7 +32,6 @@ const ProductosVendedor: React.FC = () => {
             ))}
           </IonRow>
         </IonGrid>
-        </IonRouterLink>
       </IonContent>
     </IonPage>
   );
