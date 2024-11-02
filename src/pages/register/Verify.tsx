@@ -1,7 +1,7 @@
 import { IonButton, IonCol, IonContent, IonGrid, IonIcon, IonImg, IonPage, IonRouterLink, IonRow, IonText } from "@ionic/react";
 import { checkmarkCircle } from "ionicons/icons";
 import './Verify.css'
-import BackButton from "../../components/backBtn/BackButton";
+import BackButton from "../../components/BackButton/BackButton";
 
 const Verify: React.FC = () => {
     return (

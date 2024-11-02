@@ -1,8 +1,16 @@
-import { IonContent, IonPage, IonButton, IonRouterLink } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonRouterLink, useIonRouter, IonIcon } from '@ionic/react';
 import './perfil.css';
-import EditarPerfil from '../EditarPerfil/EditarPerfil';
+import { pricetag, logoWhatsapp,informationCircleOutline, logOutOutline } from 'ionicons/icons';
 
 const Perfil = () => {
+
+  const router = useIonRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    router.push("/login");
+  }
+
   return (
     <IonPage>
       <IonContent className="ion-padding">
@@ -23,26 +31,27 @@ const Perfil = () => {
           <div className="perfil-options">
             <IonRouterLink routerLink='/MisProductos' className="perfil-option">
               <div className="option-content">
+                <IonIcon icon={pricetag} className='option-icon'/>
                 <p>Mis productos</p>
               </div>
             </IonRouterLink>
             <IonRouterLink href="https://wa.me/1234567890" className="perfil-option">
               <div className="option-content">
+                <IonIcon icon={logoWhatsapp} className='option-icon'/>
                 <p>Mi WhatsApp</p>
               </div>
             </IonRouterLink>
             <IonRouterLink routerLink='/SobreLaEmpresa' className="perfil-option">
               <div className="option-content">
+                <IonIcon icon={informationCircleOutline} className='option-icon'/>
                 <p>Sobre la empresa</p>
               </div>
             </IonRouterLink>
           </div>
 
-          <IonRouterLink routerLink='/Editar-Perfil' className="update-button2">
-          <IonButton expand="block" >
-            Editar perfil
-          </IonButton>
-          </IonRouterLink>
+            <IonButton expand="block" onClick={handleLogout} className="logout-button">
+            <IonIcon icon={logOutOutline} style={{ color: 'white', fontSize: '24px' }}/>
+            </IonButton>
         </div>
       </IonContent>
     </IonPage>

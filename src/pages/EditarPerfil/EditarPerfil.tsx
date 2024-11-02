@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import './EditarPerfil.css';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 import { camera } from 'ionicons/icons';
 
 const EditarPerfil: React.FC = () => {
@@ -46,7 +46,7 @@ const EditarPerfil: React.FC = () => {
     const handleCancelChanges = () => {
         setImagePerfil(null);
         setImagePreviewPerfil(null);
-        history.push('/tab3');
+        history.push('/Perfil');
     };
 
     return (

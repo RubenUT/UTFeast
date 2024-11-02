@@ -2,7 +2,7 @@ import React from 'react';
 import { IonPage, IonContent, IonText, IonImg, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonToolbar } from '@ionic/react';
 import { call, mail, location } from 'ionicons/icons';
 import './EmpresaInfo.css';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 
 const CompanyInfo: React.FC = () => {
   return (

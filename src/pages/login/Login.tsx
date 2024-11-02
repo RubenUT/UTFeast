@@ -11,10 +11,14 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5100/users/login", {
+      const response = await axios.post("http://localhost:5100/utfeast/login", {
         email,
         password,
       });
+
+      const token = response.data.token;
+
+      localStorage.setItem("authToken", token);
 
       console.log("Inicio de sesión exitoso:", response.data);
       history.push('/tab1')

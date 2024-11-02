@@ -1,6 +1,6 @@
 import { IonContent, IonGrid, IonPage, IonRow, IonCol, IonText, IonImg, IonToolbar, IonIcon, IonRouterLink } from '@ionic/react';
 import './MisProductos.css';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 import { pencil } from 'ionicons/icons';
 
 const products = [
