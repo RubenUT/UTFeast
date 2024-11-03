@@ -1,12 +1,12 @@
 import { IonIcon, IonTabBar, IonTabButton, useIonRouter } from "@ionic/react";
-import { addOutline, homeOutline, personOutline, search, searchOutline } from "ionicons/icons";
-import './NavBar.css'
+import { addOutline, homeOutline, personOutline, searchOutline } from "ionicons/icons";
+import './NavBar.css';
 
 const NavBar: React.FC = () => {
     const router = useIonRouter();
 
     const handleNavigation = (path: string) => {
-        router.push(path, 'forward', 'replace');
+        router.push(path, 'forward');
     };
 
     return (
@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
                 <IonIcon aria-hidden="true" icon={personOutline} />
             </IonTabButton>
         </IonTabBar>
-    )
-}
+    );
+};
 
 export default NavBar;

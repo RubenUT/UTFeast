@@ -45,6 +45,7 @@ const ProductInfo: React.FC = () => {
                         </IonCol>
                     </IonRow>
                 </IonGrid>
+                <div style={{ height: '50px' }}></div>
             </IonContent>
         </IonPage>
     );

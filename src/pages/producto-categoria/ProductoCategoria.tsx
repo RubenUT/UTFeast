@@ -118,6 +118,7 @@ const ProductoCategoria: React.FC = () => {
                         </IonCol>
                     </IonRow>
                 </IonGrid>
+                <div style={{ height: '20px' }}></div>
             </IonContent>
         </IonPage>
     );

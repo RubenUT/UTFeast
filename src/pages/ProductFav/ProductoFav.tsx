@@ -27,7 +27,7 @@ const favoriteProducts = [
     },
     {
         id: 4,
-        name: 'Half boiled egg sandwich',
+        name: 'Papa',
         img: 'https://manageat.com/wp-content/uploads/2022/05/healthy-leaves-mix-salad-2022-03-03-12-52-14-utc.jpg',
         user: 'Natalia Luca',
         userAvatar: 'https://www.famousbirthdays.com/headshots/jh-de-la-cruz-1.jpg',
@@ -50,7 +50,7 @@ const ProductoFavorito = () => {
                 <IonSearchbar
                     value={searchText}
                     onIonChange={(e) => setSearchText(e.detail.value!)}
-                    placeholder="Buscar tu comida"
+                    placeholder="Busca tu comida"
                     mode="ios"
                     showCancelButton="always"
                 />

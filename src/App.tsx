@@ -9,7 +9,7 @@ import {
   setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { home, person, search, add } from 'ionicons/icons';
+import { addOutline, homeOutline, personOutline, searchOutline } from "ionicons/icons";
 import { useState, useEffect } from 'react';
 
 // Import your pages
@@ -76,27 +76,45 @@ const App: React.FC = () => {
             <Route exact path="/verify" component={Verify} />
             <Route exact path="/error" component={ErrorScreen}/>
             
-            <ProtectedRoute exact path="/tab1" component={Tab1} />
-            <ProtectedRoute exact path="/tab2" component={Tab2} />
-            <ProtectedRoute exact path="/Perfil" component={Perfil} />
-            <ProtectedRoute exact path="/Producto-Information" component={ProductInfo} />
-            <ProtectedRoute exact path="/EditarPerfil" component={EditarPerfil} />
-            <ProtectedRoute exact path="/ProductoCategoria" component={ProductoCategoria} />
-            <ProtectedRoute exact path="/MisProductos" component={MisProductos} />
-            <ProtectedRoute exact path="/Agregar-Producto" component={CreateProduct} />
-            <ProtectedRoute exact path="/MasProductos" component={MasProductos} />
-            <ProtectedRoute exact path="/ProductoFavorito" component={ProductoFavorito} />
-            <ProtectedRoute exact path="/PerfilUsers" component={PerfilUsers} />
-            <ProtectedRoute exact path="/ProductosVendedor" component={ProductosVendedor} />
-            <ProtectedRoute exact path="/EditarProducto" component={EditProduct} />
-            <ProtectedRoute exact path="/SobreLaEmpresa" component={CompanyInfo} />
+            <Route exact path="/tab1" component={Tab1} />
+            <Route exact path="/tab2" component={Tab2} />
+            <Route exact path="/Perfil" component={Perfil} />
+            <Route exact path="/Producto-Information" component={ProductInfo} />
+            <Route exact path="/EditarPerfil" component={EditarPerfil} />
+            <Route exact path="/ProductoCategoria" component={ProductoCategoria} />
+            <Route exact path="/MisProductos" component={MisProductos} />
+            <Route exact path="/Agregar-Producto" component={CreateProduct} />
+            <Route exact path="/MasProductos" component={MasProductos} />
+            <Route exact path="/ProductoFavorito" component={ProductoFavorito} />
+            <Route exact path="/PerfilUsers" component={PerfilUsers} />
+            <Route exact path="/ProductosVendedor" component={ProductosVendedor} />
+            <Route exact path="/EditarProducto" component={EditProduct} />
+            <Route exact path="/SobreLaEmpresa" component={CompanyInfo} />
             
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>
           </IonRouterOutlet>
 
-          {showNavBar && <NavBar />}
+          {showNavBar && (
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="tab1" href="/tab1">
+                <IonIcon aria-hidden="true" icon={homeOutline} />
+              </IonTabButton>
+
+              <IonTabButton tab="tab2" href="/tab2">
+                <IonIcon aria-hidden="true" icon={searchOutline} />
+              </IonTabButton>
+
+              <IonTabButton tab="add" href="/Agregar-Producto" className="center-tab-button">
+                <IonIcon icon={addOutline} />
+              </IonTabButton>
+
+              <IonTabButton tab="perfil" href="/Perfil">
+                <IonIcon aria-hidden="true" icon={personOutline} />
+              </IonTabButton>
+            </IonTabBar>
+          )}
         </IonTabs>
       </IonReactRouter>
     </IonApp>

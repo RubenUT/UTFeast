@@ -23,7 +23,7 @@ const Perfil = () => {
             <p className="perfil-email">Dosamarvis@gmail.com</p>
             <p className="perfil-phone">+234 9011039271</p>
             <p className="perfil-info">Soy JH Emilio Escobar de la Cruz influenciador que recoge más de 500 mil seguidores en su cuenta oficial de Instagram y cuatro millones de admiradores en TikTok.</p>
-            <IonRouterLink routerLink='/Editar-Perfil' className="change-link">
+            <IonRouterLink routerLink='/EditarPerfil' className="change-link">
               Editar
             </IonRouterLink>
           </div>
