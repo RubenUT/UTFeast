@@ -4,7 +4,6 @@
     overflow-x: auto;
     white-space: nowrap;
     width: 100%;
-    padding: 10px 0;
 }
 
 .Categorias {
@@ -15,8 +14,8 @@
     flex-shrink: 0;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
 }
 
 .Categorias:hover {
@@ -31,7 +30,6 @@
 
 .IonCardHeader {
     text-align: center;
-    padding: 10px;
 }
 
 .procat__header {
@@ -86,7 +84,6 @@
 .procat__row--header {
     display: flex;
     align-items: center;
-    padding: 10px 0;
     margin-bottom: 10px;
 }
 
