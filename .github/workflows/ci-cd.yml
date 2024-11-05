@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Cambia a 16 o 20 según tu proyecto
+          node-version: '20'  # Actualiza a Node.js 20
 
       - name: Install Dependencies
         run: npm install
@@ -30,6 +30,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Actualiza a Node.js 20
 
       - name: Run Tests
         run: npm test
