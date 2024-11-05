@@ -9,7 +9,7 @@ import {
   setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { home, person, search, add } from 'ionicons/icons';
+import { addOutline, homeOutline, personOutline, searchOutline } from "ionicons/icons";
 import { useState, useEffect } from 'react';
 
 // Import your pages
@@ -30,6 +30,7 @@ import PerfilUsers from './pages/PerfilUsers/PerfilUsers';
 import ProductosVendedor from './pages/ProductosVendedor/ProductosVendedor';
 import EditProduct from './pages/EditarProducto/EditarProduct';
 import CompanyInfo from './pages/SobreLaEmpresa/EmpresaInfo';
+import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoute';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -49,101 +50,68 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import ErrorScreen from './components/ProtectedRoutes/ErrorScreen';
+import NavBar from './components/NavBar/NavBar';
 
 setupIonicReact();
 
 const App: React.FC = () => {
   const location = useLocation();
-  const [showTabs, setShowTabs] = useState(false);
+  const showNavBarRoutes = [
+    'tab1','tab2','Perfil','Producto-Information',
+    'EditarPerfil','ProductoCategoria','MisProductos',
+    'Agregar-Producto','MasProductos','ProductoFavorito',
+    'PerfilUsers','ProductosVendedor','EditarProducto','SobreLaEmpresa'
+  ]
 
-  useEffect(() => {
-    setShowTabs(!['/login', '/register'].includes(location.pathname));
-  }, [location]);
-  
-  useEffect(() => {
-    setShowTabs(!['/login', '/register'].includes(location.pathname));
-  }, []);
+  const showNavBar = showNavBarRoutes.includes(location.pathname.split('/')[1]);
 
   return (
     <IonApp>
       <IonReactRouter>
         <IonTabs>
-          <IonRouterOutlet>
-            <Route exact path="/tab1">
-              <Tab1 />
-            </Route>
-            <Route exact path="/tab2">
-              <Tab2 />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/register">
-              <Register />
-            </Route>
-            <Route exact path="/verify">
-              <Verify />
-            </Route>
-            <Route exact path="/Producto-Information">
-              <ProductInfo />
-            </Route>
-            <Route exact path="/EditarPerfil">
-              <EditarPerfil />
-            </Route>
-            <Route exact path="/ProductoCategoria">
-              <ProductoCategoria />
-            </Route>
-            <Route exact path="/MisProductos">
-              <MisProductos />
-            </Route>
+        <IonRouterOutlet>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/verify" component={Verify} />
+            <Route exact path="/error" component={ErrorScreen}/>
+            
+            <Route exact path="/tab1" component={Tab1} />
+            <Route exact path="/tab2" component={Tab2} />
+            <Route exact path="/Perfil" component={Perfil} />
+            <Route exact path="/Producto-Information" component={ProductInfo} />
+            <Route exact path="/EditarPerfil" component={EditarPerfil} />
+            <Route exact path="/ProductoCategoria" component={ProductoCategoria} />
+            <Route exact path="/MisProductos" component={MisProductos} />
+            <Route exact path="/Agregar-Producto" component={CreateProduct} />
+            <Route exact path="/MasProductos" component={MasProductos} />
+            <Route exact path="/ProductoFavorito" component={ProductoFavorito} />
+            <Route exact path="/PerfilUsers" component={PerfilUsers} />
+            <Route exact path="/ProductosVendedor" component={ProductosVendedor} />
+            <Route exact path="/EditarProducto" component={EditProduct} />
+            <Route exact path="/SobreLaEmpresa" component={CompanyInfo} />
+            
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>
-            <Route exact path="/Agregar-Producto">
-              <CreateProduct />
-            </Route>
-            <Route exact path="/MasProductos">
-              <MasProductos />
-            </Route>
-            <Route exact path="/Editar-Perfil">
-              <EditarPerfil />
-            </Route>
-            <Route exact path="/Perfil">
-              <Perfil />
-            </Route>
-            <Route exact path="/ProductoFavorito">
-              <ProductoFavorito />
-            </Route>
-            <Route exact path="/PerfilUsers">
-              <PerfilUsers />
-            </Route>
-            <Route exact path="/ProductosVendedor">
-              <ProductosVendedor />
-            </Route>
-            <Route exact path="/EditarProducto">
-              <EditProduct />
-            </Route>
-            <Route exact path="/SobreLaEmpresa">
-              <CompanyInfo />
-            </Route>
           </IonRouterOutlet>
 
-          {showTabs && (
+          {showNavBar && (
             <IonTabBar slot="bottom">
               <IonTabButton tab="tab1" href="/tab1">
-                <IonIcon aria-hidden="true" icon={home} />
+                <IonIcon aria-hidden="true" icon={homeOutline} />
               </IonTabButton>
 
               <IonTabButton tab="tab2" href="/tab2">
-                <IonIcon aria-hidden="true" icon={search} />
+                <IonIcon aria-hidden="true" icon={searchOutline} />
               </IonTabButton>
 
               <IonTabButton tab="add" href="/Agregar-Producto" className="center-tab-button">
-                <IonIcon icon={add} />
+                <IonIcon icon={addOutline} />
               </IonTabButton>
 
               <IonTabButton tab="perfil" href="/Perfil">
-                <IonIcon aria-hidden="true" icon={person} />
+                <IonIcon aria-hidden="true" icon={personOutline} />
               </IonTabButton>
             </IonTabBar>
           )}

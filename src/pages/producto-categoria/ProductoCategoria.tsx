@@ -1,6 +1,6 @@
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCol, IonContent, IonGrid, IonImg, IonPage, IonRouterLink, IonRow, IonSearchbar, IonText, IonToolbar } from "@ionic/react";
 import './ProductoCategoria.css';
-import BackButton from "../../components/backBtn/BackButton";
+import BackButton from "../../components/BackButton/BackButton";
 import { searchCircle } from "ionicons/icons";
 
 const ProductoCategoria: React.FC = () => {
@@ -52,35 +52,59 @@ const ProductoCategoria: React.FC = () => {
 
     return (
         <IonPage>
-        <IonContent>
-            <IonGrid className="procat">
-                <IonToolbar>
-                    <BackButton />
-                </IonToolbar>
-                <IonRow className="procat__row--top">
-                    <IonCol className="procat__top--col">
-                        <IonRouterLink routerLink="/tab2">
-                            <IonSearchbar
-                                placeholder="Buscar tu comida"
-                                mode="ios"
-                                showCancelButton="never"
-                            />
-                        </IonRouterLink>
-                    </IonCol>
-                </IonRow>
+            <IonContent>
+                <BackButton />
+                <IonGrid className="procat" style={{ marginTop: 70 }}>
 
-                <IonRow className="procat__row--header">
-                    <IonCol className="procat__header--col">
-                        <IonText className="procat__header--title">Productos favoritos</IonText>
-                        <IonRouterLink routerLink='/ProductoFavorito' className="ViewMore-link">
-                            Ver más
-                        </IonRouterLink>
-                    </IonCol>
-                </IonRow>
+                    <IonRow className="procat__row--top">
+                        <IonCol className="procat__top--col">
+                            <IonRouterLink routerLink="/tab2">
+                                <IonSearchbar
+                                    placeholder="Buscar tu comida"
+                                    mode="ios"
+                                    showCancelButton="never"
+                                />
+                            </IonRouterLink>
+                        </IonCol>
+                    </IonRow>
 
-                <IonRow className="procat__row--mid">
-                    <IonCol className="procat__col--mid">
-                        <IonRouterLink routerLink="/Producto-Information">
+                    <IonRow className="procat__row--header">
+                        <IonCol className="procat__header--col">
+                            <IonText className="procat__header--title">Productos favoritos</IonText>
+                            <IonRouterLink routerLink='/ProductoFavorito' className="ViewMore-link">
+                                Ver más
+                            </IonRouterLink>
+                        </IonCol>
+                    </IonRow>
+
+                    <IonRow className="procat__row--mid">
+                        <IonCol className="procat__col--mid">
+                            <IonRouterLink routerLink="/Producto-Information">
+                                <div className="Cardscategorias">
+                                    {Categorias.map(categoria => (
+                                        <IonCard key={categoria.id} className="Categorias">
+                                            <IonImg src={categoria.img} className="centered-image" />
+                                            <IonCardHeader>
+                                                <IonCardSubtitle>{categoria.nombre}</IonCardSubtitle>
+                                            </IonCardHeader>
+                                        </IonCard>
+                                    ))}
+                                </div>
+                            </IonRouterLink>
+                        </IonCol>
+                    </IonRow>
+
+                    <IonRow className="procat__row--header">
+                        <IonCol className="procat__header--col">
+                            <IonText className="procat__header--title">Comida</IonText>
+                            <IonRouterLink routerLink='/MasProductos' className="ViewMore-link">
+                                Ver más
+                            </IonRouterLink>
+                        </IonCol>
+                    </IonRow>
+
+                    <IonRow className="procat__row--bottom">
+                        <IonCol className="procat__col--bottom">
                             <div className="Cardscategorias">
                                 {Categorias.map(categoria => (
                                     <IonCard key={categoria.id} className="Categorias">
@@ -91,36 +115,12 @@ const ProductoCategoria: React.FC = () => {
                                     </IonCard>
                                 ))}
                             </div>
-                        </IonRouterLink>
-                    </IonCol>
-                </IonRow>
-
-                <IonRow className="procat__row--header">
-                    <IonCol className="procat__header--col">
-                        <IonText className="procat__header--title">Comida</IonText>
-                        <IonRouterLink routerLink='/MasProductos' className="ViewMore-link">
-                            Ver más
-                        </IonRouterLink>
-                    </IonCol>
-                </IonRow>
-
-                <IonRow className="procat__row--bottom">
-                    <IonCol className="procat__col--bottom">
-                        <div className="Cardscategorias">
-                            {Categorias.map(categoria => (
-                                <IonCard key={categoria.id} className="Categorias">
-                                    <IonImg src={categoria.img} className="centered-image" />
-                                    <IonCardHeader>
-                                        <IonCardSubtitle>{categoria.nombre}</IonCardSubtitle>
-                                    </IonCardHeader>
-                                </IonCard>
-                            ))}
-                        </div>
-                    </IonCol>
-                </IonRow>
-            </IonGrid>
-        </IonContent>
-    </IonPage>
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
+                <div style={{ height: '20px' }}></div>
+            </IonContent>
+        </IonPage>
     );
 }
 

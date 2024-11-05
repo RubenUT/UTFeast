@@ -74,8 +74,14 @@
   color: black;
 }
 
+.option-icon{
+  font-size: 20px;
+  margin-right: 10px;
+}
+
 .option-content {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
 }
@@ -88,13 +94,15 @@
   font-weight: bold;
   border-radius: 12px;
 }
-.update-button2 {
+.logout-button {
   width: 100%;
   color: white;
   font-size: 16px;
   font-weight: bold;
   border-radius: 12px;
+  --background: #DC3545;
 }
+
 ion-button{
   --background: #019882;
 }

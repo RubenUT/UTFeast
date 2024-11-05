@@ -1,6 +1,6 @@
 import { IonContent, IonGrid, IonPage, IonRow, IonCol, IonText, IonImg, IonToolbar, IonRouterLink } from '@ionic/react';
 import './ProductosVendedor.css';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 
 const productsvendedor = [
   { id: 1, name: 'Veggie tomato mix', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },

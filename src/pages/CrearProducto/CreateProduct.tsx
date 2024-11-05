@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
 import './CreateProduct.css';
 import { camera } from 'ionicons/icons';
+import axios from 'axios';
 
 const CreateProduct: React.FC = () => {
     const [imageProduct, setImageProduct] = useState<File | null>(null);
@@ -12,11 +13,11 @@ const CreateProduct: React.FC = () => {
     const textareaRefProduct = useRef<HTMLIonTextareaElement>(null);
 
     useEffect(() => {
-            setImageProduct(null);
-            setImagePreviewProduct(null);
-            setPriceProduct('');
-            setNameProduct('');
-            setDescriptionProduct('');
+        setImageProduct(null);
+        setImagePreviewProduct(null);
+        setPriceProduct('');
+        setNameProduct('');
+        setDescriptionProduct('');
     }, []);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,34 +28,99 @@ const CreateProduct: React.FC = () => {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ imageProduct, nameProduct , priceProduct, descriptionProduct });
+
+        if (!nameProduct || !priceProduct || !descriptionProduct) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
+
+        const convertImageToBase64 = (file: File, quality: number = 0.7) => {
+            return new Promise<string>((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target?.result as string;
+        
+                    img.onload = () => {
+                        const canvas = document.createElement("canvas");
+                        const ctx = canvas.getContext("2d");
+                        
+                        const maxWidth = 800;
+                        const scaleFactor = img.width > maxWidth ? maxWidth / img.width : 1;
+                        const width = img.width * scaleFactor;
+                        const height = img.height * scaleFactor;
+        
+                        canvas.width = width;
+                        canvas.height = height;
+        
+                        ctx?.drawImage(img, 0, 0, width, height);
+        
+                        const base64Image = canvas.toDataURL("image/jpeg", quality);
+                        resolve(base64Image);
+                    };
+        
+                    img.onerror = reject;
+                };
+        
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        };
+
+        const imageBase64 = imageProduct ? await convertImageToBase64(imageProduct, 0.7) : null;
+
+        const productData = {
+            name: nameProduct,
+            price: Number(priceProduct),
+            description: descriptionProduct,
+            image: imageBase64
+        };
+
+        const token = localStorage.getItem("authToken");
+
+        try {
+            const response = await axios.post(
+                "http://localhost:5100/utfeast/products/create",
+                productData,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+            console.log("Producto agregado exitosamente", response.data);
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
     };
 
-    return ( 
+    return (
         <IonPage>
             <IonContent className="ion-padding contentCreateProduct" scrollY={true} fullscreen={true}>
                 <h1 className='titleCreateProduct'>Agrega el Producto</h1>
-                <form onSubmit={handleSubmit} className="formCreateProduct">
+                <form onSubmit={handleSubmit} className="formCreateProduct" id='formProduct'>
                     <IonItem className="form-groupCreateProduct button-imageCreateProduct" lines="none">
                         <div className="button-containerCreateProduct">
                             <label htmlFor="file-input" className="custom-file-labelCreateProduct">
                                 <IonIcon aria-hidden="true" icon={camera} className="custom-iconCreateProduct" />
                                 <span className="custom-file-textCreateProduct">Selecciona una imagen</span>
                             </label>
-                            <input 
-                                type="file" 
-                                id="file-input" 
-                                onChange={handleImageChange} 
-                                className="file-input-hiddenCreateProduct" 
+                            <input
+                                type="file"
+                                id="file-input"
+                                onChange={handleImageChange}
+                                className="file-input-hiddenCreateProduct"
                             />
                         </div>
                     </IonItem>
                     {imagePreviewProduct && (
                         <IonItem className="form-groupCreateProduct" lines="none">
                             <div className="image-preview-wrapperCreateProduct">
-                                <IonImg src={imagePreviewProduct} alt="Vista previa de la imagen" className="image-previewCreateProduct"/>
+                                <IonImg src={imagePreviewProduct} alt="Vista previa de la imagen" className="image-previewCreateProduct" />
                             </div>
                         </IonItem>
                     )}
@@ -79,7 +145,7 @@ const CreateProduct: React.FC = () => {
                         />
                     </IonItem>
                     <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
-                        <IonTextarea 
+                        <IonTextarea
                             ref={textareaRefProduct}
                             value={descriptionProduct}
                             onIonInput={(e) => setDescriptionProduct(e.detail.value!)}

@@ -34,12 +34,12 @@ const Tab1: React.FC = () => {
   ];
 
   const vendedores = [
-    { id: 1, nombre: 'Luis', img: 'https://thumbs.dreamstime.com/b/retrato-de-un-hombre-apuesto-19987550.jpg' },
-    { id: 2, nombre: 'Maria', img: 'https://img.freepik.com/fotos-premium/mujer-vieja-muy-fea-nariz-grande-boca-pequena-gafas-ojos_954932-1104.jpg' },
-    { id: 3, nombre: 'Juan', img: 'https://static5.depositphotos.com/1040226/462/i/450/depositphotos_4625972-stock-photo-man-showing-his-realistic-vampire.jpg' },
-    { id: 4, nombre: 'Ana', img: 'https://i.ytimg.com/vi/Ghsjcj47E04/maxresdefault.jpg' },
-    { id: 5, nombre: 'Carlos', img: 'https://thumbs.dreamstime.com/b/hombre-hermoso-33633873.jpg' },
-    { id: 6, nombre: 'Sofia', img: 'https://i1.sndcdn.com/artworks-ktbPzWaFZBfOtTD3-R91Rdg-t500x500.jpg' }
+    { id: 1, nombre: 'Luis', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
+    { id: 2, nombre: 'Maria', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
+    { id: 3, nombre: 'Juan', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
+    { id: 4, nombre: 'Ana', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
+    { id: 5, nombre: 'Carlos', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
+    { id: 6, nombre: 'Sofia', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' }
   ];
 
   if (noInternet) {
@@ -48,6 +48,7 @@ const Tab1: React.FC = () => {
 
   return (
     <IonPage>
+      
       <IonContent>
         <IonGrid className="menu">
           <IonRow className="menu__row--top">

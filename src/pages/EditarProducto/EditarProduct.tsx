@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
 import './EditarProduct.css';
 import { camera } from 'ionicons/icons';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 
 const EditProduct: React.FC = () => {
     const [imageProduct, setImageProduct] = useState<File | null>(null);

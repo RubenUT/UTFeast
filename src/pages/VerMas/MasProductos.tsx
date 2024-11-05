@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IonContent, IonPage, IonCard, IonCardContent, IonImg, IonText, IonAvatar, IonToolbar, IonSearchbar, IonRouterLink } from '@ionic/react';
 import './MasProductos.css';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 
 const masproduct = [
   {

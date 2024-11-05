@@ -1,7 +1,7 @@
 import { IonContent, IonPage, IonButton, IonRouterLink, IonHeader, IonToolbar } from '@ionic/react';
 import './PerfilUser.css';
 import EditarPerfil from '../EditarPerfil/EditarPerfil';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 
 const PerfilUsers = () => {
     const userInfo = [

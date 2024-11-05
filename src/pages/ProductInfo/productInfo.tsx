@@ -1,5 +1,5 @@
 import { IonButton, IonCol, IonContent, IonGrid, IonIcon, IonImg, IonPage, IonRow, IonText, IonToolbar } from '@ionic/react';
-import BackButton from '../../components/backBtn/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 import './productInfo.css';
 import { logoWhatsapp } from 'ionicons/icons';
 
@@ -45,6 +45,7 @@ const ProductInfo: React.FC = () => {
                         </IonCol>
                     </IonRow>
                 </IonGrid>
+                <div style={{ height: '50px' }}></div>
             </IonContent>
         </IonPage>
     );
