@@ -16,10 +16,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Actualiza a Node.js 20
+          node-version: '20'  # Asegúrate de que esté configurado a Node.js 20
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Verify vitest installation
+        run: npm ls vitest
 
       - name: Build
         run: npm run build
@@ -34,21 +37,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Actualiza a Node.js 20
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Verify vitest installation
+        run: npm ls vitest
 
       - name: Run Tests
-        run: npm test
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Deploy
-        env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        run: |
-          # Comando para conectar y desplegar (ej. scp, ssh)
-          echo "Desplegando aplicación..."
+        run: npm test  # Ejecuta el script de prueba
