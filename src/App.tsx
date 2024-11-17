@@ -30,6 +30,7 @@ import PerfilUsers from './pages/PerfilUsers/PerfilUsers';
 import ProductosVendedor from './pages/ProductosVendedor/ProductosVendedor';
 import EditProduct from './pages/EditarProducto/EditarProduct';
 import CompanyInfo from './pages/SobreLaEmpresa/EmpresaInfo';
+import CreatedProduct from './pages/ProductInfo/CreatedProduct';
 import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoute';
 
 /* Core CSS required for Ionic components to work properly */
@@ -76,12 +77,13 @@ const App: React.FC = () => {
             <Route exact path="/verify" component={Verify} />
             <Route exact path="/error" component={ErrorScreen}/>
             
-            <Route exact path="/tab1" component={Tab1} />
+            <ProtectedRoute exact path="/tab1" component={Tab1} />
             <Route exact path="/tab2" component={Tab2} />
             <Route exact path="/Perfil" component={Perfil} />
-            <Route exact path="/Producto-Information" component={ProductInfo} />
+            <Route exact path="/ProductInfo/:_id" component={ProductInfo} />
+            <Route path="/CreatedProduct/:productId" component={CreatedProduct} />
             <Route exact path="/EditarPerfil" component={EditarPerfil} />
-            <Route exact path="/ProductoCategoria" component={ProductoCategoria} />
+            <Route exact path="/ProductoCategoria/:categoryId" component={ProductoCategoria} />
             <Route exact path="/MisProductos" component={MisProductos} />
             <Route exact path="/Agregar-Producto" component={CreateProduct} />
             <Route exact path="/MasProductos" component={MasProductos} />

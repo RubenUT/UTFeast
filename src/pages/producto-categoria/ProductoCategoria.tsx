@@ -1,9 +1,15 @@
-import { IonCard, IonCardHeader, IonCardSubtitle, IonCol, IonContent, IonGrid, IonImg, IonPage, IonRouterLink, IonRow, IonSearchbar, IonText, IonToolbar } from "@ionic/react";
+import { IonCard, IonCardHeader, IonCardSubtitle, IonCol, IonContent, IonGrid, IonImg, IonPage, IonRouterLink, IonRow, IonSearchbar, IonText } from "@ionic/react";
 import './ProductoCategoria.css';
 import BackButton from "../../components/BackButton/BackButton";
 import { searchCircle } from "ionicons/icons";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router";
 
 const ProductoCategoria: React.FC = () => {
+
+    const { categoryId } = useParams<{ categoryId: string }>();
+    const [products, setProducts] = useState<{ _id: string, name: string, image: string }[]>([]);
 
     const Categorias = [
         {
@@ -49,6 +55,18 @@ const ProductoCategoria: React.FC = () => {
 
     ];
 
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5100/utfeast/categories/${categoryId}/products`);
+                setProducts(response.data.products);
+            } catch (e) {
+
+                console.log('Error al cargar productos:', e)
+            }
+        };
+        fetchProducts();
+    }, [categoryId]);
 
     return (
         <IonPage>
@@ -79,18 +97,18 @@ const ProductoCategoria: React.FC = () => {
 
                     <IonRow className="procat__row--mid">
                         <IonCol className="procat__col--mid">
-                            <IonRouterLink routerLink="/Producto-Information">
-                                <div className="Cardscategorias">
-                                    {Categorias.map(categoria => (
-                                        <IonCard key={categoria.id} className="Categorias">
-                                            <IonImg src={categoria.img} className="centered-image" />
+                            <div className="Cardscategorias">
+                                {products.map(product => (
+                                    <IonRouterLink key={product._id} routerLink={`/ProductInfo/${product._id}`} className="Categorias">
+                                        <IonCard style={{boxShadow:'none'}}>
+                                            <IonImg src={product.image} onError={(e) => (e.currentTarget.src = "https://gebelesebeti.ge/front/asset/img/default-product.png")} className="centered-image" />
                                             <IonCardHeader>
-                                                <IonCardSubtitle>{categoria.nombre}</IonCardSubtitle>
+                                                <IonCardSubtitle>{product.name}</IonCardSubtitle>
                                             </IonCardHeader>
                                         </IonCard>
-                                    ))}
-                                </div>
-                            </IonRouterLink>
+                                    </IonRouterLink>
+                                ))}
+                            </div>
                         </IonCol>
                     </IonRow>
 

@@ -3,6 +3,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInp
 import './CreateProduct.css';
 import { camera } from 'ionicons/icons';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const CreateProduct: React.FC = () => {
     const [imageProduct, setImageProduct] = useState<File | null>(null);
@@ -11,13 +12,20 @@ const CreateProduct: React.FC = () => {
     const [nameProduct, setNameProduct] = useState<string>('');
     const [descriptionProduct, setDescriptionProduct] = useState<string>('');
     const textareaRefProduct = useRef<HTMLIonTextareaElement>(null);
+    const [categories, setCategories] = useState<{ _id: string; name: string }[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const history = useHistory();
 
     useEffect(() => {
-        setImageProduct(null);
-        setImagePreviewProduct(null);
-        setPriceProduct('');
-        setNameProduct('');
-        setDescriptionProduct('');
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get("http://localhost:5100/utfeast/categories");
+                setCategories(response.data.data);
+            } catch (error) {
+                console.error("Error al cargar categorías:", error);
+            }
+        };
+        fetchCategories();
     }, []);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +39,7 @@ const CreateProduct: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!nameProduct || !priceProduct || !descriptionProduct) {
+        if (!nameProduct || !priceProduct || !descriptionProduct || !selectedCategory) {
             alert("Por favor completa todos los campos.");
             return;
         }
@@ -42,28 +50,28 @@ const CreateProduct: React.FC = () => {
                 reader.onload = (event) => {
                     const img = new Image();
                     img.src = event.target?.result as string;
-        
+
                     img.onload = () => {
                         const canvas = document.createElement("canvas");
                         const ctx = canvas.getContext("2d");
-                        
+
                         const maxWidth = 800;
                         const scaleFactor = img.width > maxWidth ? maxWidth / img.width : 1;
                         const width = img.width * scaleFactor;
                         const height = img.height * scaleFactor;
-        
+
                         canvas.width = width;
                         canvas.height = height;
-        
+
                         ctx?.drawImage(img, 0, 0, width, height);
-        
+
                         const base64Image = canvas.toDataURL("image/jpeg", quality);
                         resolve(base64Image);
                     };
-        
+
                     img.onerror = reject;
                 };
-        
+
                 reader.onerror = reject;
                 reader.readAsDataURL(file);
             });
@@ -75,7 +83,8 @@ const CreateProduct: React.FC = () => {
             name: nameProduct,
             price: Number(priceProduct),
             description: descriptionProduct,
-            image: imageBase64
+            image: imageBase64,
+            categoryId: selectedCategory
         };
 
         const token = localStorage.getItem("authToken");
@@ -93,6 +102,8 @@ const CreateProduct: React.FC = () => {
             );
 
             console.log("Producto agregado exitosamente", response.data);
+            const productId = response.data.data._id;
+            history.push(`/CreatedProduct/${productId}`);
         } catch (error) {
             console.error("Error en la solicitud:", error);
         }
@@ -156,6 +167,21 @@ const CreateProduct: React.FC = () => {
                             maxlength={200}
                             autoGrow={true}
                         />
+                    </IonItem>
+
+                    <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
+                        <IonLabel>Selecciona una Categoría:</IonLabel>
+                        <select
+                            value={selectedCategory || ""}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                        >
+                            <option value="" disabled>Selecciona una categoría</option>
+                            {categories.map((category) => (
+                                <option key={category._id} value={category._id}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
                     </IonItem>
                     <IonButton expand="block" type="submit" className="submit-buttonCreateProduct">
                         Agregar Producto

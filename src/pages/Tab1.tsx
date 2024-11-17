@@ -1,7 +1,7 @@
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonicSlides, IonGrid, IonRow, IonCol, IonImg, IonText, IonAvatar, IonItem, IonRouterLink } from '@ionic/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, Navigation } from 'swiper/modules';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Tab1.css';
 
 import 'swiper/css';
@@ -12,6 +12,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/zoom';
 import '@ionic/react/css/ionic-swiper.css';
 import NoInternetConnection from '../components/NoInternet/NoInternetConection';
+import axios from 'axios';
 
 const Tab1: React.FC = () => {
   const [noInternet, setNoInternet] = useState(false);
@@ -24,14 +25,7 @@ const Tab1: React.FC = () => {
     { id: 5, url: 'https://www.cocinacaserayfacil.net/wp-content/uploads/2020/04/Recetas-de-comidas-para-ni%C3%B1os.jpg' },
   ];
 
-  const categorias = [
-    { id: 1, img: 'https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg', nombre: 'Pastas' },
-    { id: 2, img: 'https://www.maizycacao.com.au/static/bb61178af8405ff7dcf008da0b34414c/83cf1/Tacos.png', nombre: 'Tacos' },
-    { id: 3, img: 'https://www.shutterstock.com/image-photo/assortment-sweet-desserts-isolated-on-260nw-2473437115.jpg', nombre: 'Postres' },
-    { id: 4, img: 'https://m.media-amazon.com/images/I/91Z9CwJL9hL._AC_UF1000,1000_QL80_.jpg', nombre: 'Dulces' },
-    { id: 5, img: 'https://www.cnature.es/wp-content/uploads/elementor/thumbs/hamburguesa-con-guacamole-qatb9dfxztr5an44q7dowb74i3r76ru30c25o10ymw.jpg', nombre: 'Borgar' },
-    { id: 6, img: 'https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/62FAD752-6853-4822-956D-C77F6F96D4E6/Derivates/92BABE34-B56B-42AC-A347-ACE3376EA303.jpg', nombre: 'Tortas' },
-  ];
+  const [categories, setCategories] = useState<{_id: string; name:string; image:string}[]>([]);
 
   const vendedores = [
     { id: 1, nombre: 'Luis', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
@@ -42,6 +36,19 @@ const Tab1: React.FC = () => {
     { id: 6, nombre: 'Sofia', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' }
   ];
 
+  useEffect(()=>{
+    const fetchCategories = async () => {
+      try{
+        const response = await axios.get("http://localhost:5100/utfeast/categories");
+        console.log(response.data.data);
+        setCategories(response.data.data);
+      }catch(e){
+        console.log('Error al cargar categorias:', e)
+      }
+    };
+    fetchCategories();
+  }, []);
+  
   if (noInternet) {
     return <NoInternetConnection />;
   }
@@ -92,17 +99,17 @@ const Tab1: React.FC = () => {
               </IonRow>
 
               <div className="menu__carousel">
-                {categorias.map((categoria) => (
-                  <div key={categoria.id} className="menu_carousel--item">
-                    <IonRouterLink routerLink="/ProductoCategoria" className="NombreProduct">
+                {categories.map((category) => (
+                  <div key={category._id} className="menu_carousel--item">
+                    <IonRouterLink routerLink={`/ProductoCategoria/${category._id}`} className="NombreProduct">
                       <IonAvatar>
                         <img
-                          src={categoria.img}
-                          alt={categoria.nombre}
+                          src={category.image}
                           onError={(e) => (e.currentTarget.src = "https://i1.sndcdn.com/artworks-ktbPzWaFZBfOtTD3-R91Rdg-t500x500.jpg")}
+                          onLoad={() => console.log(`Loaded image: ${category.image}`)}
                         />
                       </IonAvatar>
-                      <IonText>{categoria.nombre}</IonText>
+                      <IonText>{category.name}</IonText>
                     </IonRouterLink>
                   </div>
                 ))}
