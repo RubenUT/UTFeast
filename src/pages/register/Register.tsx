@@ -65,7 +65,6 @@ const Register: React.FC = () => {
         email,
         password,
       });
-      console.log("Registro exitoso:", response.data);
       history.push("/verify");
     } catch (error) {
       console.error("Error al registrarse:", error);

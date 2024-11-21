@@ -15,7 +15,6 @@ const ProductInfo: React.FC = () => {
         const fetchProduct = async () => {
             try{
                 const response = await axios.get(`http://localhost:5100/utfeast/products/${_id}`);
-                console.log(response.data.data)
                 setProduct(response.data.data);
             } catch(e){
                 console.log('Error al cargar producto:', e)
@@ -32,7 +31,7 @@ const ProductInfo: React.FC = () => {
                         <IonCol className="product-info__col--top">
                             <IonImg
                                 className="product-info__img"
-                                src={product?.image}
+                                src={product?.image || 'https://via.placeholder.com/150'}
                                 alt="Imagen de producto"
                             />
                         </IonCol>

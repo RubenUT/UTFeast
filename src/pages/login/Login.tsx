@@ -20,7 +20,6 @@ const Login: React.FC = () => {
 
       localStorage.setItem("authToken", token);
 
-      console.log("Inicio de sesión exitoso:", response.data);
       history.push('/tab1')
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -68,7 +67,7 @@ const Login: React.FC = () => {
                 fill="outline"
                 placeholder="Contraseña"
                 value={password}
-                onIonChange={(e) => setPassword(e.detail.value!)}
+                onIonInput={(e) => setPassword(e.detail.value!)}
               ></IonInput>
             </IonCol>
           </IonRow>

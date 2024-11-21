@@ -1,10 +1,32 @@
 import { IonContent, IonPage, IonButton, IonRouterLink, useIonRouter, IonIcon } from '@ionic/react';
 import './perfil.css';
 import { pricetag, logoWhatsapp,informationCircleOutline, logOutOutline } from 'ionicons/icons';
+import { useEffect, useState } from 'react';
+import IUser from '../../interfaces/IUser';
+import axios from 'axios';
 
 const Perfil = () => {
 
   const router = useIonRouter();
+  const [user, setUser] = useState<IUser | null>(null);
+
+  useEffect( () => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem("authToken");
+      try{
+        const response = await axios.get("http://localhost:5100/utfeast/users/me", {
+          headers : {
+            Authorization: `Bearer ${token}`
+          },
+        });
+
+        setUser(response.data.data);
+      }catch(e){
+        console.log('Error al cargar el usuario:', e)
+      }
+    };
+    fetchUser();
+  }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -17,19 +39,19 @@ const Perfil = () => {
         <div className="perfil-container">
           <div className="perfil-header">
             <div className="avatar-placeholder">
-              <img src="https://www.famousbirthdays.com/headshots/jh-de-la-cruz-1.jpg" alt="Avatar" className="avatar-img" />
+              <img src={user?.image} alt="Avatar" className="avatar-img" />
             </div>
-            <h2 className="perfil-name">JH Escobar de la Cruz</h2>
-            <p className="perfil-email">Dosamarvis@gmail.com</p>
-            <p className="perfil-phone">+234 9011039271</p>
-            <p className="perfil-info">Soy JH Emilio Escobar de la Cruz influenciador que recoge más de 500 mil seguidores en su cuenta oficial de Instagram y cuatro millones de admiradores en TikTok.</p>
-            <IonRouterLink routerLink='/EditarPerfil' className="change-link">
+            <h2 className="perfil-name">{user?.name}</h2>
+            <p className="perfil-email">{user?.email}</p>
+            <p className="perfil-phone">{user?.phone}</p>
+            <p className="perfil-info">{user?.description}</p>
+            <IonRouterLink routerLink={`/EditarPerfil/${user?._id}`} className="change-link">
               Editar
             </IonRouterLink>
           </div>
         
           <div className="perfil-options">
-            <IonRouterLink routerLink='/MisProductos' className="perfil-option">
+            <IonRouterLink routerLink={`/MisProductos/${user?._id}`} className="perfil-option">
               <div className="option-content">
                 <IonIcon icon={pricetag} className='option-icon'/>
                 <p>Mis productos</p>

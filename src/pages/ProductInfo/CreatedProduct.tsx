@@ -15,7 +15,6 @@ const CreatedProduct: React.FC = () => {
         async function fetchProduct() {
             try {
                 const response = await axios.get(`http://localhost:5100/utfeast/products/${productId}`);
-                console.log(response.data.data);
                 setProduct(response.data.data);
             } catch (error) {
                 console.error("Error al obtener el producto:", error);

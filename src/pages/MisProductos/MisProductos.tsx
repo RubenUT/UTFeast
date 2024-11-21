@@ -2,17 +2,33 @@ import { IonContent, IonGrid, IonPage, IonRow, IonCol, IonText, IonImg, IonToolb
 import './MisProductos.css';
 import BackButton from '../../components/BackButton/BackButton';
 import { pencil } from 'ionicons/icons';
-
-const products = [
-  { id: 1, name: 'Veggie tomato mix', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 2, name: 'Egg and cucumber...', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 3, name: 'Fried chicken m.', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 4, name: 'Moi-moi and ekpa.', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 5, name: 'Rice and stew', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 6, name: 'Fish pepper soup', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-];
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { IProduct } from '../../interfaces/IProduct';
+import axios from 'axios';
 
 const MisProductos: React.FC = () => {
+
+  const { _id } = useParams<{ _id: string }>();
+  const [products, setProducts] = useState<IProduct[]>([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const token = localStorage.getItem("authToken");
+      try {
+        const response = await axios.get(`http://localhost:5100/utfeast/users/${_id}/products`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setProducts(response.data.data);
+      } catch (e) {
+        console.error("Error al cargar los productos:", e);
+      }
+    };
+
+    fetchProducts();
+  }, [_id]);
+
   return (
     <IonPage>
       <IonToolbar>
@@ -23,17 +39,17 @@ const MisProductos: React.FC = () => {
         <IonGrid>
           <IonRow>
             {products.map((product) => (
-              <IonCol size="6" key={product.id} className="product-card-colMisProductos">
-                  <div className="product-cardMisProductos">
-                    <IonRouterLink routerLink="/EditarProducto" style={{ position: 'absolute', top: '8px', right: '8px' }}>
-                      <IonIcon aria-hidden="true" icon={pencil} className="icon-pencilMisProductos" />
-                    </IonRouterLink>
+              <IonCol size="6" key={product._id} className="product-card-colMisProductos">
+                <div className="product-cardMisProductos">
+                  <IonRouterLink routerLink={`/EditarProducto/${product._id}`} style={{ position: 'absolute', top: '8px', right: '8px' }}>
+                    <IonIcon aria-hidden="true" icon={pencil} className="icon-pencilMisProductos" />
+                  </IonRouterLink>
 
-                    <IonImg src={product.img} className="product-imageMisProductos" />
-                    
-                    <IonText className="product-nameMisProductos">{product.name}</IonText>
-                    <IonText className="product-priceMisProductos">{product.price}</IonText>
-                  </div>
+                  <IonImg src={product.image || 'https://via.placeholder.com/150'} className="product-imageMisProductos" />
+
+                  <IonText className="product-nameMisProductos">{product.name}</IonText>
+                  <IonText className="product-priceMisProductos">${product.price}</IonText>
+                </div>
               </IonCol>
             ))}
           </IonRow>

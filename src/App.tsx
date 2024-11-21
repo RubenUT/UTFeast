@@ -82,15 +82,15 @@ const App: React.FC = () => {
             <Route exact path="/Perfil" component={Perfil} />
             <Route exact path="/ProductInfo/:_id" component={ProductInfo} />
             <Route path="/CreatedProduct/:productId" component={CreatedProduct} />
-            <Route exact path="/EditarPerfil" component={EditarPerfil} />
+            <Route exact path="/EditarPerfil/:_id" component={EditarPerfil} />
             <Route exact path="/ProductoCategoria/:categoryId" component={ProductoCategoria} />
-            <Route exact path="/MisProductos" component={MisProductos} />
+            <Route exact path="/MisProductos/:_id" component={MisProductos} />
             <Route exact path="/Agregar-Producto" component={CreateProduct} />
             <Route exact path="/MasProductos" component={MasProductos} />
             <Route exact path="/ProductoFavorito" component={ProductoFavorito} />
-            <Route exact path="/PerfilUsers" component={PerfilUsers} />
-            <Route exact path="/ProductosVendedor" component={ProductosVendedor} />
-            <Route exact path="/EditarProducto" component={EditProduct} />
+            <Route exact path="/PerfilUsers/:_id" component={PerfilUsers} />
+            <Route exact path="/ProductosVendedor/:_id" component={ProductosVendedor} />
+            <Route exact path="/EditarProducto/:_id" component={EditProduct} />
             <Route exact path="/SobreLaEmpresa" component={CompanyInfo} />
             
             <Route exact path="/">

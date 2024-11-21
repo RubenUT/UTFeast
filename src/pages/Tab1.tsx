@@ -13,6 +13,7 @@ import 'swiper/css/zoom';
 import '@ionic/react/css/ionic-swiper.css';
 import NoInternetConnection from '../components/NoInternet/NoInternetConection';
 import axios from 'axios';
+import IUser from '../interfaces/IUser';
 
 const Tab1: React.FC = () => {
   const [noInternet, setNoInternet] = useState(false);
@@ -26,27 +27,30 @@ const Tab1: React.FC = () => {
   ];
 
   const [categories, setCategories] = useState<{_id: string; name:string; image:string}[]>([]);
-
-  const vendedores = [
-    { id: 1, nombre: 'Luis', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
-    { id: 2, nombre: 'Maria', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
-    { id: 3, nombre: 'Juan', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
-    { id: 4, nombre: 'Ana', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
-    { id: 5, nombre: 'Carlos', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' },
-    { id: 6, nombre: 'Sofia', img: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' }
-  ];
+  const [sellers, setSellers] = useState<IUser[]>([]);
 
   useEffect(()=>{
     const fetchCategories = async () => {
       try{
         const response = await axios.get("http://localhost:5100/utfeast/categories");
-        console.log(response.data.data);
         setCategories(response.data.data);
       }catch(e){
         console.log('Error al cargar categorias:', e)
       }
     };
     fetchCategories();
+  }, []);
+
+  useEffect( () => {
+    const fetchSellers = async () => {
+      try{
+        const response = await axios.get('http://localhost:5100/utfeast/users');
+        setSellers(response.data.data);
+      }catch(e){
+        console.log('Error al cargar usuarios:', e)
+      }
+    };
+    fetchSellers();
   }, []);
   
   if (noInternet) {
@@ -104,9 +108,8 @@ const Tab1: React.FC = () => {
                     <IonRouterLink routerLink={`/ProductoCategoria/${category._id}`} className="NombreProduct">
                       <IonAvatar>
                         <img
-                          src={category.image}
+                          src={category.image || 'https://via.placeholder.com/150'}
                           onError={(e) => (e.currentTarget.src = "https://i1.sndcdn.com/artworks-ktbPzWaFZBfOtTD3-R91Rdg-t500x500.jpg")}
-                          onLoad={() => console.log(`Loaded image: ${category.image}`)}
                         />
                       </IonAvatar>
                       <IonText>{category.name}</IonText>
@@ -128,17 +131,17 @@ const Tab1: React.FC = () => {
               </IonRow>
 
               <div className="menu__vendedores">
-                {vendedores.map((vendedor) => (
-                  <div key={vendedor.id} className="menu_vendedores--item">
-                    <IonRouterLink routerLink="/PerfilUsers" className="NombreProduct">
+                {sellers.map((seller) => (
+                  <div key={seller._id} className="menu_vendedores--item">
+                    <IonRouterLink routerLink={`/PerfilUsers/${seller._id}`} className="NombreProduct">
                       <IonAvatar>
                         <img
-                          src={vendedor.img}
-                          alt={vendedor.nombre}
+                          src={seller.image || 'https://via.placeholder.com/150'}
+                          alt={seller.name}
                           onError={(e) => (e.currentTarget.src = "https://example.com/backup-image.jpg")} // Imagen de respaldo
                         />
                       </IonAvatar>
-                      <IonText>{vendedor.nombre}</IonText>
+                      <IonText>{seller.name}</IonText>
                     </IonRouterLink>
                   </div>
                 ))}
