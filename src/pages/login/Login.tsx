@@ -21,6 +21,7 @@ const Login: React.FC = () => {
       localStorage.setItem("authToken", token);
 
       history.push('/tab1')
+      window.location.reload();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Error al iniciar sesión", error.response?.data || error.message);

@@ -1,22 +1,42 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon, IonAlert, IonText } from '@ionic/react';
 import './CreateProduct.css';
 import { camera } from 'ionicons/icons';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import IUser from '../../interfaces/IUser';
 
 const CreateProduct: React.FC = () => {
+    const history = useHistory();
+    const [user, setUser] = useState<IUser | null>(null);
     const [imageProduct, setImageProduct] = useState<File | null>(null);
     const [imagePreviewProduct, setImagePreviewProduct] = useState<string | null>(null);
     const [priceProduct, setPriceProduct] = useState<string>('');
     const [nameProduct, setNameProduct] = useState<string>('');
     const [descriptionProduct, setDescriptionProduct] = useState<string>('');
-    const textareaRefProduct = useRef<HTMLIonTextareaElement>(null);
     const [categories, setCategories] = useState<{ _id: string; name: string }[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-    const history = useHistory();
+    const [showAlert, setShowAlert] = useState(false);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const textareaRefProduct = useRef<HTMLIonTextareaElement>(null);
 
     useEffect(() => {
+        const fetchUser = async () => {
+            const token = localStorage.getItem("authToken");
+            try {
+                const response = await axios.get("http://localhost:5100/utfeast/users/me", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                });
+
+                setUser(response.data.data);
+            } catch (e) {
+                console.log('Error al cargar el usuario:', e);
+            }
+        };
+        fetchUser();
+
         const fetchCategories = async () => {
             try {
                 const response = await axios.get("http://localhost:5100/utfeast/categories");
@@ -36,11 +56,42 @@ const CreateProduct: React.FC = () => {
         }
     };
 
+    const validateForm = () => {
+        const newErrors: { [key: string]: string } = {};
+
+        if (!imageProduct) newErrors.imageProduct = "La imagen del producto es requerida.";
+        if (!nameProduct) newErrors.nameProduct = "El nombre del producto es requerido.";
+        if (!priceProduct) newErrors.priceProduct = "El precio del producto es requerido.";
+        if (!descriptionProduct) newErrors.descriptionProduct = "La descripción del producto es requerida.";
+        if (!selectedCategory) newErrors.selectedCategory = "La categoría del producto es requerida.";
+
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!nameProduct || !priceProduct || !descriptionProduct || !selectedCategory) {
-            alert("Por favor completa todos los campos.");
+        if (!validateForm()) {
+            return;
+        }
+
+        const token = localStorage.getItem("authToken");
+
+        try {
+            const userResponse = await axios.get("http://localhost:5100/utfeast/users/me", {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            const user = userResponse.data.data;
+            if (!user.phone) {
+                setShowAlert(true);
+                return;
+            }
+        } catch (error) {
+            console.error("Error al verificar el usuario:", error);
             return;
         }
 
@@ -87,8 +138,6 @@ const CreateProduct: React.FC = () => {
             categoryId: selectedCategory
         };
 
-        const token = localStorage.getItem("authToken");
-
         try {
             const response = await axios.post(
                 "http://localhost:5100/utfeast/products/create",
@@ -104,6 +153,7 @@ const CreateProduct: React.FC = () => {
             console.log("Producto agregado exitosamente", response.data);
             const productId = response.data.data._id;
             history.push(`/CreatedProduct/${productId}`);
+            window.location.reload();
         } catch (error) {
             console.error("Error en la solicitud:", error);
         }
@@ -145,6 +195,7 @@ const CreateProduct: React.FC = () => {
                             labelPlacement="floating"
                         />
                     </IonItem>
+                    {errors.nameProduct && <IonText color="danger">{errors.nameProduct}</IonText>}
                     <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
                         <IonInput
                             type="number"
@@ -155,6 +206,7 @@ const CreateProduct: React.FC = () => {
                             labelPlacement="floating"
                         />
                     </IonItem>
+                    {errors.priceProduct && <IonText color="danger">{errors.priceProduct}</IonText>}
                     <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
                         <IonTextarea
                             ref={textareaRefProduct}
@@ -168,12 +220,13 @@ const CreateProduct: React.FC = () => {
                             autoGrow={true}
                         />
                     </IonItem>
-
+                    {errors.descriptionProduct && <IonText color="danger">{errors.descriptionProduct}</IonText>}
                     <IonItem className="form-groupCreateProduct input-containerCreateProduct" lines="none">
-                        <IonLabel>Selecciona una Categoría:</IonLabel>
+                        <IonLabel className="category-labelCreateProduct">Categoría:</IonLabel>
                         <select
                             value={selectedCategory || ""}
                             onChange={(e) => setSelectedCategory(e.target.value)}
+                            className="category-selectCreateProduct"
                         >
                             <option value="" disabled>Selecciona una categoría</option>
                             {categories.map((category) => (
@@ -183,10 +236,33 @@ const CreateProduct: React.FC = () => {
                             ))}
                         </select>
                     </IonItem>
+                    {errors.selectedCategory && <IonText color="danger">{errors.selectedCategory}</IonText>}
                     <IonButton expand="block" type="submit" className="submit-buttonCreateProduct">
                         Agregar Producto
                     </IonButton>
                 </form>
+                <IonAlert
+                    isOpen={showAlert}
+                    onDidDismiss={() => setShowAlert(false)}
+                    header={'Número de teléfono requerido'}
+                    message={'No puedes crear un producto sin un número de teléfono. ¿Quieres redirigirte a editar tu perfil?'}
+                    buttons={[
+                        {
+                            text: 'Cancelar',
+                            role: 'cancel',
+                            cssClass: 'secondary',
+                            handler: () => {
+                                setShowAlert(false);
+                            }
+                        },
+                        {
+                            text: 'Editar perfil',
+                            handler: () => {
+                                history.push(`/EditarPerfil/${user?._id}`);
+                            }
+                        }
+                    ]}
+                />
             </IonContent>
         </IonPage>
     );

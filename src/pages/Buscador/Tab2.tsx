@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { IonItem, IonList, IonSearchbar, IonContent, IonPage, IonText, IonSpinner, IonRouterLink } from '@ionic/react';
+import { IonItem, IonList, IonSearchbar, IonContent, IonPage, IonText, IonSpinner, IonRouterLink, IonImg } from '@ionic/react';
 import axios from 'axios';
 import { IProduct } from '../../interfaces/IProduct';
+import './buscador.css';
 
 const Tab2: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -52,24 +53,29 @@ const Tab2: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonSearchbar
-          value={searchQuery}
-          onIonInput={handleInput}
-          debounce={500}
-          placeholder="Buscar productos"
-        />
+        <div className="searchbar-container">
+          <IonSearchbar
+            value={searchQuery}
+            onIonInput={handleInput}
+            debounce={500}
+            placeholder="Buscar productos"
+          />
+        </div>
 
         {isLoading ? (
-          <IonSpinner name="dots" />
+          <div className="loading-spinner">
+            <IonSpinner name="dots" />
+          </div>
         ) : (
           <>
-            {noResults && <p style={{ color: 'red', padding: '10px' }}>No se encontraron productos.</p>}
+            {noResults && <p className="no-results">No se encontraron productos.</p>}
 
-            <IonList>
+            <IonList className="product-list">
               {filteredProducts.map((product) => (
                 <IonRouterLink key={product._id} routerLink={`/ProductInfo/${product._id}`}>
-                  <IonItem key={product._id}>
-                    <IonText>{product.name}</IonText>
+                  <IonItem className="product-item">
+                    <IonImg src={product.image || 'https://via.placeholder.com/150'} className="product-image" />
+                    <IonText className="product-text">{product.name}</IonText>
                   </IonItem>
                 </IonRouterLink>
               ))}

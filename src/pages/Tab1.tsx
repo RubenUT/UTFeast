@@ -21,7 +21,7 @@ const Tab1: React.FC = () => {
   const slides = [
     { id: 1, url: 'https://content.skyscnr.com/m/2dcd7d0e6f086057/original/GettyImages-186142785.jpg' },
     { id: 2, url: 'https://www.cocinacaserayfacil.net/wp-content/uploads/2020/03/Platos-de-comida-que-pides-a-domicilio-y-puedes-hacer-en-casa.jpg' },
-    { id: 3, url: 'https://www.paulinacocina.net/wp-content/uploads/2020/08/tacos-meat-food-mexican-lunch-dinner-640x480.jpg' },
+    { id: 3, url: 'https://editorialtelevisa.brightspotcdn.com/dims4/default/b91caa2/2147483647/strip/false/crop/1200x672+0+0/resize/1200x672!/quality/90/?url=https%3A%2F%2Fk2-prod-editorial-televisa.s3.us-east-1.amazonaws.com%2Fbrightspot%2F6b%2F59%2Fae19ff0c42029062b2f3d03d3b1f%2Fmejores-recetas-de-comida-mexicana.jpeg' },
     { id: 4, url: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/52bf/live/5bc2da50-f03a-11ee-93c8-19dcc8295613.jpg.webp' },
     { id: 5, url: 'https://www.cocinacaserayfacil.net/wp-content/uploads/2020/04/Recetas-de-comidas-para-ni%C3%B1os.jpg' },
   ];

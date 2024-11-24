@@ -12,14 +12,14 @@
     text-align: center;
 }
 
-.product-card-col {
+.product-card-colMisProductos {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.product-card {
+.product-cardMisProductos {
     width: 100%;
     max-width: 160px;
     padding: 15px;
@@ -33,20 +33,21 @@
     transition: transform 0.2s ease-in-out;
 }
 
-.product-card:hover {
+.product-cardMisProductos:hover {
     transform: scale(1.05);
 }
 
-.product-image {
+.product-imageMisProductos {
     width: 100%;
     max-width: 120px;
-    max-height: 120px;
-    border-radius: 50%;
+    height: 120px;
+    border-radius: 10px;
     object-fit: cover;
+    object-position: center;
     margin-bottom: 10px;
 }
 
-.product-name {
+.product-nameMisProductos {
     font-size: 14px;
     font-weight: 600;
     color: #333;
@@ -56,10 +57,10 @@
     text-overflow: ellipsis;
 }
 
-.product-price {
+.product-priceMisProductos {
     font-size: 16px;
     font-weight: bold;
-    color: darkgreen;
+    color: #019882;
 }
 
 .no-products-container {

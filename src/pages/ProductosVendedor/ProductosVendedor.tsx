@@ -34,7 +34,7 @@ const ProductosVendedor: React.FC = () => {
       <IonContent className="ion-padding">
         {sellerProducts.length === 0 ? (
           <div className="no-products-container">
-            <img 
+            <IonImg 
               src="/src/assets/images/no-products.png" 
               alt="No hay productos disponibles" 
               className="no-products-image" 
@@ -51,12 +51,12 @@ const ProductosVendedor: React.FC = () => {
             <IonGrid>
               <IonRow>
                 {sellerProducts.map((sellerProduct) => (
-                  <IonCol size="6" key={sellerProduct._id} className="product-card-col">
+                  <IonCol size="6" key={sellerProduct._id} className="product-card-colMisProductos">
                     <IonRouterLink routerLink={`/ProductInfo/${sellerProduct._id}`}>
-                      <div className="product-card">
-                        <IonImg src={sellerProduct.image || 'https://via.placeholder.com/150'} className="product-image" />
-                        <IonText className="product-name">{sellerProduct.name}</IonText>
-                        <IonText className="product-price">${sellerProduct.price}</IonText>
+                      <div className="product-cardMisProductos">
+                        <IonImg src={sellerProduct.image || 'https://via.placeholder.com/150'} className="product-imageMisProductos" />
+                        <IonText className="product-nameMisProductos">{sellerProduct.name}</IonText>
+                        <IonText className="product-priceMisProductos">${sellerProduct.price}</IonText>
                       </div>
                     </IonRouterLink>
                   </IonCol>

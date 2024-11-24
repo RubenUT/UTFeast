@@ -14,6 +14,8 @@ const EditProduct: React.FC = () => {
     const [priceProduct, setPriceProduct] = useState<string>('');
     const [nameProduct, setNameProduct] = useState<string>('');
     const [descriptionProduct, setDescriptionProduct] = useState<string>('');
+    const [categories, setCategories] = useState<{ _id: string; name: string }[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const textareaRefProduct = useRef<HTMLIonTextareaElement>(null);
 
     const { _id } = useParams<{ _id: string }>();
@@ -62,11 +64,22 @@ const EditProduct: React.FC = () => {
                 setPriceProduct(product.price.toString());
                 setDescriptionProduct(product.description);
                 setImagePreviewProduct(product.image);
+                setSelectedCategory(product.categoryId); // Set the selected category
             } catch (e) {
                 console.log('Error al cargar informacion del producto:', e)
             }
         };
         fetchProduct();
+
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get("http://localhost:5100/utfeast/categories");
+                setCategories(response.data.data);
+            } catch (error) {
+                console.error("Error al cargar categorías:", error);
+            }
+        };
+        fetchCategories();
 
         return () => {
             setImageProduct(null);
@@ -88,6 +101,10 @@ const EditProduct: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!nameProduct || !priceProduct || !descriptionProduct || !selectedCategory) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
 
         let imageBase64 = null;
 
@@ -102,6 +119,7 @@ const EditProduct: React.FC = () => {
             price: parseFloat(priceProduct),
             description: descriptionProduct,
             image: imageBase64,
+            categoryId: selectedCategory
         }
 
         const token = localStorage.getItem("authToken");
@@ -187,6 +205,21 @@ const EditProduct: React.FC = () => {
                             maxlength={200}
                             autoGrow={true}
                         />
+                    </IonItem>
+                    <IonItem className="form-groupEditProduct input-containerEditProduct" lines="none">
+                        <IonLabel className="category-labelEditProduct">Categoría:</IonLabel>
+                        <select
+                            value={selectedCategory || ""}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            className="category-selectEditProduct"
+                        >
+                            <option value="" disabled>Selecciona una categoría</option>
+                            {categories.map((category) => (
+                                <option key={category._id} value={category._id}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
                     </IonItem>
                     <IonButton expand="block" type="submit" className="submit-buttonEditProduct">
                         Guardar Cambios

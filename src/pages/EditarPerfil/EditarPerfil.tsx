@@ -125,6 +125,7 @@ const EditarPerfil: React.FC = () => {
             );
 
             history.push(`/Perfil`);
+            window.location.reload();
         } catch (error) {
             console.error("Error al actualizar el perfil:", error);
         }

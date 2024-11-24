@@ -11,6 +11,11 @@ const ProductoCategoria: React.FC = () => {
     const { categoryId } = useParams<{ categoryId: string }>();
     const [products, setProducts] = useState<{ _id: string, name: string, image: string }[]>([]);
 
+
+    useEffect(() => {
+        console.log('categoryId:', categoryId);
+    }, []);
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -45,7 +50,7 @@ const ProductoCategoria: React.FC = () => {
                     <IonRow className="procat__row--header">
                         <IonCol className="procat__header--col">
                             <IonText className="procat__header--title">Productos favoritos</IonText>
-                            <IonRouterLink routerLink={`/ProductoFavorito`} className="ViewMore-link">
+                            <IonRouterLink routerLink={`/ProductoFavorito/${categoryId}`} className="ViewMore-link">
                                 Ver más
                             </IonRouterLink>
                         </IonCol>
@@ -71,7 +76,7 @@ const ProductoCategoria: React.FC = () => {
                     <IonRow className="procat__row--header">
                         <IonCol className="procat__header--col">
                             <IonText className="procat__header--title">Comida</IonText>
-                            <IonRouterLink routerLink='/MasProductos' className="ViewMore-link">
+                            <IonRouterLink routerLink={`/MasProductos/${categoryId}`}  className="ViewMore-link">
                                 Ver más
                             </IonRouterLink>
                         </IonCol>

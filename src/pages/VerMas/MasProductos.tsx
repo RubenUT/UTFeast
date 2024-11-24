@@ -1,80 +1,120 @@
-import { useState } from 'react';
-import { IonContent, IonPage, IonCard, IonCardContent, IonImg, IonText, IonAvatar, IonToolbar, IonSearchbar, IonRouterLink } from '@ionic/react';
+import { IonContent, IonPage, IonCard, IonCardContent, IonImg, IonText, IonAvatar, IonToolbar, IonSearchbar, IonRouterLink, useIonRouter } from '@ionic/react';
 import './MasProductos.css';
 import BackButton from '../../components/BackButton/BackButton';
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import IUser from '../../interfaces/IUser';
 
-const masproduct = [
-  {
-    id: 1,
-    name: 'Sunny Egg & Toast Avocado',
-    img: 'https://manageat.com/wp-content/uploads/2022/05/healthy-leaves-mix-salad-2022-03-03-12-52-14-utc.jpg',
-    user: 'Alice Fala',
-    userAvatar: 'https://www.famousbirthdays.com/headshots/jh-de-la-cruz-1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Bowl of noodle with beef',
-    img: 'https://manageat.com/wp-content/uploads/2022/05/healthy-leaves-mix-salad-2022-03-03-12-52-14-utc.jpg',
-    user: 'James Spader',
-    userAvatar: 'https://www.famousbirthdays.com/headshots/jh-de-la-cruz-1.jpg',
-  },
-  {
-    id: 3,
-    name: 'Easy homemade beef burger',
-    img: 'https://manageat.com/wp-content/uploads/2022/05/healthy-leaves-mix-salad-2022-03-03-12-52-14-utc.jpg',
-    user: 'Ruben Estrada',
-    userAvatar: 'https://www.famousbirthdays.com/headshots/jh-de-la-cruz-1.jpg',
-  },
-  {
-    id: 4,
-    name: 'Half boiled egg sandwich',
-    img: 'https://manageat.com/wp-content/uploads/2022/05/healthy-leaves-mix-salad-2022-03-03-12-52-14-utc.jpg',
-    user: 'Natalia Luca',
-    userAvatar: 'https://www.famousbirthdays.com/headshots/jh-de-la-cruz-1.jpg',
-  },
-];
+interface Product {
+  _id: string;
+  name: string;
+  image: string;
+  userId: string;
+}
 
 const MasProductos = () => {
+  const { categoryId } = useParams<{ categoryId: string }>();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [users, setUsers] = useState<Record<string, IUser>>({});
   const [searchText, setSearchText] = useState('');
+  const router = useIonRouter();
 
-  const filteredMoreProduct = masproduct.filter((masproduct) =>
-    masproduct.name.toLowerCase().includes(searchText.toLowerCase())
-  );
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5100/utfeast/categories/${categoryId}/products`);
+        setProducts(response.data.products);
+      } catch (e) {
+        console.log('Error al cargar productos:', e);
+      }
+    };
+    fetchProducts();
+  }, [categoryId]);
+
+  useEffect(() => {
+    const fetchUsersForProducts = async () => {
+      const token = localStorage.getItem("authToken");
+
+      try {
+        const userPromises = products.map(async (product) => {
+          if (!users[product.userId]) {
+            const response = await axios.get(`http://localhost:5100/utfeast/users/${product.userId}`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            return { userId: product.userId, data: response.data.data };
+          }
+          return null;
+        });
+
+        const userResults = await Promise.all(userPromises);
+
+        const newUsers = userResults.reduce((acc, result) => {
+          if (result) {
+            acc[result.userId] = result.data;
+          }
+          return acc;
+        }, {} as Record<string, IUser>);
+
+        setUsers((prevUsers) => ({ ...prevUsers, ...newUsers }));
+      } catch (e) {
+        console.log('Error al cargar usuarios:', e);
+      }
+    };
+
+    if (products.length > 0) {
+      fetchUsersForProducts();
+    }
+  }, [products]);
+
+  const filteredProducts = searchText.trim()
+    ? products.filter((product) =>
+        product.name.toLowerCase().includes(searchText.toLowerCase())
+      )
+    : products;
 
   return (
     <IonPage>
       <IonToolbar>
         <BackButton />
-      </IonToolbar> 
+      </IonToolbar>
       <IonContent className="ion-padding">
         <IonSearchbar
           value={searchText}
-          onIonChange={(e) => setSearchText(e.detail.value!)}
+          onIonChange={(e) => setSearchText(e.detail.value || '')}
           placeholder="Buscar tu comida"
           mode="ios"
-          showCancelButton="always"
+          showCancelButton="focus"
         />
         <h2 className="favorites-title">Comida</h2>
-        <IonRouterLink routerLink='/Producto-Information'>
         <div className="favorites-grid">
-          {filteredMoreProduct.map((masproduct) => (
-            <IonCard key={masproduct.id} className="favorite-card">
-              <div className="card-image-container">
-                <IonImg src={masproduct.img} className="card-image" />
-              </div>
-              <IonCardContent>
-                <IonText className="favorite-title">{masproduct.name}</IonText>
-                <div className="user-info">
-                  <IonAvatar className="user-avatar">
-                    <img src={masproduct.userAvatar} alt={masproduct.user} />
-                  </IonAvatar>
-                  <IonText className="user-name">{masproduct.user}</IonText>
+          {filteredProducts.map(product => (
+            <IonRouterLink key={product._id} routerLink={`/ProductInfo/${product._id}`}>
+              <IonCard className="favorite-card">
+                <div className="card-image-container">
+                  <IonImg src={product.image} className="card-image" />
                 </div>
-              </IonCardContent>
-            </IonCard>
+                <IonCardContent>
+                  <IonText className="favorite-title">{product.name}</IonText>
+                  <div className="user-info">
+                    {users[product.userId] ? (
+                      <>
+                        <IonAvatar className="user-avatar">
+                          <img src={users[product.userId].image} alt="User" />
+                        </IonAvatar>
+                        <IonText className="user-name">{users[product.userId].name}</IonText>
+                      </>
+                    ) : (
+                      <IonText className="user-loading">Cargando usuario...</IonText>
+                    )}
+                  </div>
+                </IonCardContent>
+              </IonCard>
+            </IonRouterLink>
           ))}
         </div>
-        </IonRouterLink>
       </IonContent>
     </IonPage>
   );

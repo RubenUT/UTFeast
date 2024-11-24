@@ -4,6 +4,7 @@
     overflow-x: auto;
     white-space: nowrap;
     width: 100%;
+    padding-bottom: 20px;
 }
 
 .Categorias {
@@ -24,9 +25,11 @@
 
 .centered-image {
     height: 120px;
+    max-width: 100%;
     object-fit: cover;
     border-radius: 20px 20px 0 0;
 }
+
 
 .IonCardHeader {
     text-align: center;
