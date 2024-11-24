@@ -10,13 +10,14 @@
     border-radius: 20px;
     overflow: hidden;
     display: inline-block;
-    width: 336px;
-    height: 252px;
+    width: 100%;
+    max-width: 336px;
+    height: auto;
 }
 
 .image-previewCreateProduct {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
 }
 
@@ -32,9 +33,15 @@
 }
 
 .titleCreateProduct {
-    font-size: 24px;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .titleCreateProduct {
+        font-size: 1.5rem;
+    }
 }
 
 .file-input-hiddenCreateProduct {
@@ -77,13 +84,36 @@
 
 .button-containerCreateProduct {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%; 
     margin-top: 20px;
+    gap: 10px;
 }
 
 .custom-iconCreateProduct {
     font-size: 20px;
     margin-right: 10px;
-} 
+}
+
+@media (max-width: 768px) {
+    .input-containerCreateProduct {
+        margin-bottom: 15px;
+        padding: 10px;
+    }
+
+    .button-containerCreateProduct {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .submit-buttonCreateProduct {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .custom-file-labelCreateProduct {
+        padding: 8px 16px;
+    }
+}

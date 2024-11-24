@@ -1,60 +1,115 @@
+/* Estilos generales */
 .product-info {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    color: black;
-    font-family: "Inter", sans-serif;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: black;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
-.product-info__top--row{
-    width: 100%;
-    height: 40%;
-    display: flex;
-    flex-direction: column;
+.product-info__top--row {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
 }
 
-.product-info__top--row ion-img{
-    max-width: 100%;
-    max-height: 300px;
+.product-info__top--row ion-img {
+  max-width: 100%;
+  max-height: 300px;
 }
 
-.product-info__details--row{
-    width: 100%;
-    height: 70%;
-    display: flex;
-    flex-direction: column;
+.product-info__details--row {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-details--name,
 .product-details--price,
 .product-details--description,
-.product-details--seller{
-    padding: 15px;
+.product-details--seller {
+  padding: 15px;
 }
 
 .product-details--name {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
 }
 
-.product-details--price{
-    font-size: 20px;
-    color: #019882;
-    font-weight: bold;
+.product-details--price {
+  font-size: 20px;
+  color: #019882;
+  font-weight: bold;
 }
 
-.product-details--description{
-    font-size: 16px;
-    color: #666;
-    line-height: 1.5;
-    text-align: justify;
+.product-details--description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+  text-align: justify;
 }
 
 .product-details--seller {
-    font-size: 14px;
-    color: black;
-    font-style: italic;
+  font-size: 14px;
+  color: black;
+  font-style: italic;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+  .product-info__top--row {
+      height: auto;
+  }
+
+  .product-info__top--row ion-img {
+      max-height: 200px;
+  }
+
+  .product-details--name {
+      font-size: 20px;
+  }
+
+  .product-details--price {
+      font-size: 18px;
+  }
+
+  .product-details--description {
+      font-size: 14px;
+  }
+
+  .product-details--seller {
+      font-size: 12px;
+  }
+}
+
+/* Estilos para pantallas medianas */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .product-info__top--row {
+      height: 35%;
+  }
+
+  .product-info__top--row ion-img {
+      max-height: 250px;
+  }
+
+  .product-details--name {
+      font-size: 22px;
+  }
+
+  .product-details--price {
+      font-size: 18px;
+  }
+
+  .product-details--description {
+      font-size: 15px;
+  }
+
+  .product-details--seller {
+      font-size: 13px;
+  }
 }

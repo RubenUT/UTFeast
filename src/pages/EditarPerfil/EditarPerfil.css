@@ -2,6 +2,9 @@
     scroll-padding-bottom: 100px;
 }
 
+<<<<<<< Updated upstream
+.header {
+=======
 .file-input {
     margin-top: 8px;
 }
@@ -10,6 +13,52 @@
     border-radius: 20px;
     overflow: hidden;
     display: inline-block;
+}
+
+.image-preview {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.submit-button {
+    margin-top: 20px;
+    --border-radius: 8px;
+    font-weight: bold;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.5rem;
+    }
+}
+
+.file-input-hidden {
+    display: none;
+}
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #019882;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+>>>>>>> Stashed changes
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .image-preview {
@@ -72,8 +121,18 @@
 
 .button-container {
     display: flex;
+<<<<<<< Updated upstream
     justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+=======
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    margin-top: 20px;
     gap: 10px;
+>>>>>>> Stashed changes
 }
 
 .save-btn, .cancel-btn {
@@ -86,29 +145,36 @@
 }
 
 .cancel-btn {
+<<<<<<< Updated upstream
+    background-color: #f44336;
+    color: white;
+=======
     --background: #e74c3c;
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; 
-    margin-top: 20px;
-}
+@media (max-width: 768px) {
+    .input-container {
+        margin-bottom: 15px;
+        padding: 10px;
+    }
 
-.custom-file-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #019882;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
+    .button-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .save-btn, .cancel-btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .custom-file-label {
+        padding: 8px 16px;
+    }
 }
 
 .custom-icon {
     font-size: 20px;
     margin-right: 10px;
+>>>>>>> Stashed changes
 }

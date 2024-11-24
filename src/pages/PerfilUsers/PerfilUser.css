@@ -1,101 +1,159 @@
+/* Estilos generales */
 .perfil-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 16px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+}
+
+.perfil-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.perfil-email, .perfil-phone, .perfil-info {
+  font-size: 14px;
+  color: gray;
+  margin: 5px 0;
+}
+
+.perfil-phone {
+  color: green;
+}
+
+.change-link {
+  color: #019882;
+  font-size: 14px;
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+.perfil-options {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.perfil-option {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: black;
+}
+
+.option-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.update-button {
+  width: 100%;
+  background-color: #019882;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 12px;
+}
+
+.update-button2 {
+  width: 100%;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 12px;
+}
+
+ion-button {
+  --background: #019882;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
   .perfil-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+      padding: 15px;
   }
-  
+
   .avatar-placeholder {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 10px;
+      width: 60px;
+      height: 60px;
   }
-  
-  .avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+
   .perfil-name {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
+      font-size: 16px;
   }
-  
+
   .perfil-email, .perfil-phone, .perfil-info {
-    font-size: 14px;
-    color: gray;
-    margin: 5px 0;
+      font-size: 12px;
   }
-  
-  .perfil-phone{
-    color: green;
-  }
-  
-  .change-link {
-    color: #019882;
-    font-size: 14px;
-    align-self: flex-end;
-    margin-top: 10px;
-  }
-  
-  .perfil-options {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
+
   .perfil-option {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
-    color: black;
+      padding: 10px;
   }
-  
-  .option-content {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+
+  .update-button, .update-button2 {
+      font-size: 14px;
   }
-  
-  .update-button {
-    width: 100%;
-    background-color: #019882;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 12px;
+}
+
+/* Estilos para pantallas medianas */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .perfil-header {
+      padding: 18px;
   }
-  .update-button2 {
-    width: 100%;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 12px;
+
+  .avatar-placeholder {
+      width: 70px;
+      height: 70px;
   }
-  ion-button{
-    --background: #019882;
+
+  .perfil-name {
+      font-size: 17px;
   }
-  
+
+  .perfil-email, .perfil-phone, .perfil-info {
+      font-size: 13px;
+  }
+
+  .perfil-option {
+      padding: 12px;
+  }
+
+  .update-button, .update-button2 {
+      font-size: 15px;
+  }
+}

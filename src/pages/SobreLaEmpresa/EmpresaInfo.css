@@ -4,22 +4,35 @@
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 20px;
+<<<<<<< Updated upstream
 }
 
 .company-name {
+=======
+  }
+  
+  .company-name {
+>>>>>>> Stashed changes
     font-size: 28px;
     font-weight: bold;
     color: #333;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
+<<<<<<< Updated upstream
 }
 
 .company-card {
+=======
+  }
+  
+  .company-card {
+>>>>>>> Stashed changes
     margin-bottom: 15px;
     --background: white;
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+<<<<<<< Updated upstream
 }
 
 .contact-card {
@@ -44,3 +57,69 @@ ul {
     color: #333;
 }
 
+=======
+  }
+  
+  .contact-card {
+    --background: #f0f0f0;
+  }
+  
+  .contact-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .contact-icon {
+    color: #019882;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  ul {
+    padding-left: 20px;
+    list-style-type: disc;
+    color: #333;
+  }
+  
+  /* Ajustes Responsivos */
+  @media (max-width: 768px) {
+    .company-banner {
+      height: 150px;
+    }
+  
+    .company-name {
+      font-size: 24px;
+    }
+  
+    .company-card {
+      margin-bottom: 10px;
+    }
+  
+    .contact-icon {
+      font-size: 18px;
+    }
+  
+    ul {
+      padding-left: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .company-banner {
+      height: 120px;
+    }
+  
+    .company-name {
+      font-size: 20px;
+    }
+  
+    .contact-icon {
+      font-size: 16px;
+    }
+  
+    ul {
+      padding-left: 10px;
+    }
+  }
+>>>>>>> Stashed changes

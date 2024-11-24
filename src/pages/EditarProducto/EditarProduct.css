@@ -87,3 +87,54 @@
     font-size: 20px;
     margin-right: 10px;
 }
+<<<<<<< Updated upstream
+=======
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+    .image-preview-wrapperEditProduct {
+        width: 100%;
+        height: auto;
+    }
+
+    .submit-buttonEditProduct {
+        width: 100%;
+    }
+
+    .titleEditProduct {
+        font-size: 20px;
+    }
+
+    .custom-file-labelEditProduct {
+        padding: 8px 16px;
+    }
+
+    .input-containerEditProduct {
+        width: 100%;
+    }
+}
+
+/* Estilos para pantallas medianas */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .image-preview-wrapperEditProduct {
+        width: 80%;
+        height: auto;
+    }
+
+    .submit-buttonEditProduct {
+        width: 80%;
+    }
+
+    .titleEditProduct {
+        font-size: 22px;
+    }
+
+    .custom-file-labelEditProduct {
+        padding: 9px 18px;
+    }
+
+    .input-containerEditProduct {
+        width: 80%;
+    }
+}
+>>>>>>> Stashed changes

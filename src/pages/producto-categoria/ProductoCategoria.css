@@ -4,9 +4,15 @@
     overflow-x: auto;
     white-space: nowrap;
     width: 100%;
+<<<<<<< Updated upstream
 }
 
 .Categorias {
+=======
+  }
+  
+  .Categorias {
+>>>>>>> Stashed changes
     width: 150px;
     min-width: 120px;
     max-width: 150px;
@@ -16,6 +22,7 @@
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease;
+<<<<<<< Updated upstream
 }
 
 .Categorias:hover {
@@ -48,6 +55,40 @@
     width: 100%;
 }
   .custom-searchbar{
+=======
+  }
+  
+  .Categorias:hover {
+    transform: scale(1.05);
+  }
+  
+  .centered-image {
+    height: 120px;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .IonCardHeader {
+    text-align: center;
+  }
+  
+  .procat__header {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  
+  .procat__top--col {
+    width: 100%;
+  }
+  
+  .IonSearchbar {
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .custom-searchbar {
+>>>>>>> Stashed changes
     --background: #f7f7f7;
     --border-radius: 15px;
     --box-shadow: none;
@@ -63,15 +104,22 @@
     box-sizing: border-box;
     margin-top: 75px;
     border-radius: 20px;
+<<<<<<< Updated upstream
     
 }
 
 .custom-searchbar .searchbar-input {
+=======
+  }
+  
+  .custom-searchbar .searchbar-input {
+>>>>>>> Stashed changes
     width: 100%;
     border: none;
     outline: none;
     background-color: transparent;
     padding-left: 10px;
+<<<<<<< Updated upstream
 }
 
 .custom-searchbar ion-icon {
@@ -88,10 +136,30 @@
 }
 
 .procat__header--col {
+=======
+  }
+  
+  .custom-searchbar ion-icon {
+    margin-right: 8px;
+  }
+  
+  .custom-searchbar .searchbar-clear-icon {
+    margin-right: 5px;
+  }
+  
+  .procat__row--header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .procat__header--col {
+>>>>>>> Stashed changes
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+<<<<<<< Updated upstream
 }
 
 .procat__header--title {
@@ -101,8 +169,64 @@
 }
 
 .ViewMore-link {
+=======
+  }
+  
+  .procat__header--title {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #000;
+  }
+  
+  .ViewMore-link {
+>>>>>>> Stashed changes
     color: #019882;
     font-size: 16px;
     text-decoration: none;
     font-weight: bold;
+<<<<<<< Updated upstream
 }
+=======
+  }
+  
+  /* Ajustes Responsivos */
+  @media (max-width: 768px) {
+    .Categorias {
+      width: 130px;
+      min-width: 100px;
+      max-width: 130px;
+    }
+  
+    .centered-image {
+      height: 100px;
+    }
+  
+    .procat__header--title {
+      font-size: 1.2em;
+    }
+  
+    .ViewMore-link {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .Categorias {
+      width: 110px;
+      min-width: 80px;
+      max-width: 110px;
+    }
+  
+    .centered-image {
+      height: 80px;
+    }
+  
+    .procat__header--title {
+      font-size: 1em;
+    }
+  
+    .ViewMore-link {
+      font-size: 12px;
+    }
+  }
+>>>>>>> Stashed changes

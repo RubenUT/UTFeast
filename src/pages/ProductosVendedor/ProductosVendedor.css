@@ -4,16 +4,28 @@
     color: #333;
     margin-bottom: 15px;
     text-align: center;
+<<<<<<< Updated upstream
 }
 
 .product-card-col {
+=======
+  }
+  
+  .product-card-col {
+>>>>>>> Stashed changes
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
+<<<<<<< Updated upstream
 }
 
 .product-card {
+=======
+  }
+  
+  .product-card {
+>>>>>>> Stashed changes
     width: 100%;
     max-width: 160px;
     padding: 15px;
@@ -25,6 +37,7 @@
     flex-direction: column;
     align-items: center;
     transition: transform 0.2s ease-in-out;
+<<<<<<< Updated upstream
 }
 
 .product-card:hover {
@@ -32,15 +45,30 @@
 }
 
 .product-image {
+=======
+  }
+  
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .product-image {
+>>>>>>> Stashed changes
     width: 100%;
     max-width: 120px;
     max-height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
+<<<<<<< Updated upstream
 }
 
 .product-name {
+=======
+  }
+  
+  .product-name {
+>>>>>>> Stashed changes
     font-size: 14px;
     font-weight: 600;
     color: #333;
@@ -48,6 +76,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+<<<<<<< Updated upstream
 }
 
 .product-price {
@@ -55,3 +84,53 @@
     font-weight: bold;
     color: darkgreen;
 }
+=======
+  }
+  
+  .product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: darkgreen;
+  }
+  
+  /* Ajustes Responsivos */
+  @media (max-width: 768px) {
+    .product-card {
+      max-width: 140px;
+      padding: 10px;
+    }
+  
+    .product-image {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  
+    .product-name {
+      font-size: 12px;
+    }
+  
+    .product-price {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-card {
+      max-width: 120px;
+      padding: 8px;
+    }
+  
+    .product-image {
+      max-width: 80px;
+      max-height: 80px;
+    }
+  
+    .product-name {
+      font-size: 10px;
+    }
+  
+    .product-price {
+      font-size: 12px;
+    }
+  }
+>>>>>>> Stashed changes

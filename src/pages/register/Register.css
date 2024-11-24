@@ -1,11 +1,15 @@
-.register{
+.register {
     display: flex;
     flex-direction: column;
     color: black;
     width: 100%;
     height: 100%;
+<<<<<<< Updated upstream
     overflow: hidden;
     position: relative;
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
 }
 
 .register__row--top,  .register__row--bottom{
@@ -20,12 +24,30 @@
 
 
 .register__col--top{
+=======
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .register__row--top, .register__row--bottom {
+    width: 100%;
+    height: 30%;
+  }
+  
+  .register__row--form {
+    width: 100%;
+    height: 40%;
+  }
+  
+  .register__col--top {
+>>>>>>> Stashed changes
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 10px;
+<<<<<<< Updated upstream
 }
 
 .register__logo--img{
@@ -34,16 +56,27 @@
 }
 
 .register__col--form{
+=======
+  }
+  
+  .register__logo--img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .register__col--form {
+>>>>>>> Stashed changes
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.register__input{
+  }
+  
+  .register__input {
     width: 80%;
     margin-top: 5px;
     margin-bottom: 5px;
+<<<<<<< Updated upstream
     text-align: left;
 }
 
@@ -52,6 +85,9 @@
     font-size: 12px;
     text-align: left;
     width: 80%;
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
 }
 
 .register__col--bottom{
@@ -64,3 +100,62 @@
     max-height: 40px;
     margin-top: 30px;
 }
+=======
+    text-align: left;
+  }
+  
+  .register__error {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+    width: 80%;
+  }
+  
+  .register__col--bottom {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .register ion-button {
+    max-width: 200px;
+    max-height: 40px;
+    margin-top: 30px;
+  }
+  
+  /* Ajustes Responsivos */
+  @media (max-width: 768px) {
+    .register__logo--img {
+      max-width: 80%;
+    }
+  
+    .register__input {
+      width: 90%;
+    }
+  
+    .register__error {
+      font-size: 10px;
+    }
+  
+    .register ion-button {
+      width: 80%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .register__logo--img {
+      max-width: 70%;
+    }
+  
+    .register__input {
+      width: 100%;
+    }
+  
+    .register__error {
+      font-size: 8px;
+    }
+  
+    .register ion-button {
+      width: 100%;
+    }
+  }
+>>>>>>> Stashed changes

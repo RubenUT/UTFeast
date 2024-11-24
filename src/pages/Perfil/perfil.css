@@ -1,3 +1,4 @@
+/* Estilos generales */
 .perfil-container {
   display: flex;
   flex-direction: column;
@@ -44,7 +45,7 @@
   margin: 5px 0;
 }
 
-.perfil-phone{
+.perfil-phone {
   color: green;
 }
 
@@ -74,7 +75,7 @@
   color: black;
 }
 
-.option-icon{
+.option-icon {
   font-size: 20px;
   margin-right: 10px;
 }
@@ -103,6 +104,62 @@
   --background: #DC3545;
 }
 
-ion-button{
+ion-button {
   --background: #019882;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+  .perfil-header {
+    padding: 15px;
+  }
+
+  .avatar-placeholder {
+    width: 60px;
+    height: 60px;
+  }
+
+  .perfil-name {
+    font-size: 16px;
+  }
+
+  .perfil-email, .perfil-phone, .perfil-info {
+    font-size: 12px;
+  }
+
+  .perfil-option {
+    padding: 10px;
+  }
+
+  .update-button, .logout-button {
+    font-size: 14px;
+  }
+}
+
+/* Estilos para pantallas medianas */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .perfil-header {
+    padding: 18px;
+  }
+
+  .avatar-placeholder {
+    width: 70px;
+    height: 70px;
+  }
+
+  .perfil-name {
+    font-size: 17px;
+  }
+
+  .perfil-email, .perfil-phone, .perfil-info {
+    font-size: 13px;
+  }
+
+  .perfil-option {
+    padding: 12px;
+  }
+
+  .update-button, .logout-button {
+    font-size: 15px;
+  }
 }

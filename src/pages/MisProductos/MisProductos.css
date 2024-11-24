@@ -86,3 +86,63 @@
     align-items: center;
     width: 100%;
 }
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+    .product-card-colMisProductos {
+        width: 100%;
+    }
+
+    .product-cardMisProductos {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .product-imageMisProductos {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .product-nameMisProductos {
+        font-size: 12px;
+    }
+
+    .product-priceMisProductos {
+        font-size: 14px;
+    }
+
+    .icon-pencilMisProductos {
+        font-size: 20px;
+        padding: 6px;
+    }
+}
+
+/* Estilos para pantallas medianas */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .product-card-colMisProductos {
+        width: 50%;
+    }
+
+    .product-cardMisProductos {
+        max-width: 140px;
+        padding: 12px;
+    }
+
+    .product-imageMisProductos {
+        max-width: 110px;
+        max-height: 110px;
+    }
+
+    .product-nameMisProductos {
+        font-size: 13px;
+    }
+
+    .product-priceMisProductos {
+        font-size: 15px;
+    }
+
+    .icon-pencilMisProductos {
+        font-size: 22px;
+        padding: 7px;
+    }
+}
