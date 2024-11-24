@@ -6,16 +6,6 @@ import { useEffect, useState } from 'react';
 import { IProduct } from '../../interfaces/IProduct';
 import axios from 'axios';
 
-const productsvendedor = [
-  { id: 1, name: 'Veggie tomato mix', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 2, name: 'Egg and cucumber...', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 3, name: 'Fried chicken m.', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 4, name: 'Moi-moi and ekpa.', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 5, name: 'Rice and stew', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-  { id: 6, name: 'Fish pepper soup', price: 'N1,900', img: 'https://cdn.pixabay.com/photo/2020/08/24/03/35/chilaquiles-5512587_1280.jpg' },
-];
-
-
 const ProductosVendedor: React.FC = () => {
   const { _id } = useParams<{ _id: string }>();
   const [sellerProducts, setSellerProducts] = useState<IProduct[]>([]);
@@ -30,7 +20,7 @@ const ProductosVendedor: React.FC = () => {
         });
         setSellerProducts(response.data.data);
       } catch (e) {
-        console.log('Error al cargar los productos del vendedor:', e)
+        console.log('Error al cargar los productos del vendedor:', e);
       }
     };
     fetchSellerProducts();
@@ -42,23 +32,39 @@ const ProductosVendedor: React.FC = () => {
         <BackButton />
       </IonToolbar>
       <IonContent className="ion-padding">
-        <IonText className="results-text"> {sellerProducts.length} Productos </IonText>
-
-        <IonGrid>
-          <IonRow>
-            {sellerProducts.map((sellerProduct) => (
-              <IonCol size="6" key={sellerProduct._id} className="product-card-col">
-                <IonRouterLink routerLink={`/ProductInfo/${sellerProduct._id}`}>
-                  <div className="product-card">
-                    <IonImg src={sellerProduct.image || 'https://via.placeholder.com/150'} className="product-image" />
-                    <IonText className="product-name">{sellerProduct.name}</IonText>
-                    <IonText className="product-price">${sellerProduct.price}</IonText>
-                  </div>
-                </IonRouterLink>
-              </IonCol>
-            ))}
-          </IonRow>
-        </IonGrid>
+        {sellerProducts.length === 0 ? (
+          <div className="no-products-container">
+            <img 
+              src="/src/assets/images/no-products.png" 
+              alt="No hay productos disponibles" 
+              className="no-products-image" 
+            />
+            <IonText className="no-products-title">No hay productos disponibles</IonText>
+            <IonText className="no-products-message">
+              Lo sentimos, este vendedor no tiene productos disponibles por el momento.
+              Por favor, vuelve más tarde o intenta refrescar la página.
+            </IonText>
+          </div>
+        ) : (
+          <>
+            <IonText className="results-text"> {sellerProducts.length} Productos </IonText>
+            <IonGrid>
+              <IonRow>
+                {sellerProducts.map((sellerProduct) => (
+                  <IonCol size="6" key={sellerProduct._id} className="product-card-col">
+                    <IonRouterLink routerLink={`/ProductInfo/${sellerProduct._id}`}>
+                      <div className="product-card">
+                        <IonImg src={sellerProduct.image || 'https://via.placeholder.com/150'} className="product-image" />
+                        <IonText className="product-name">{sellerProduct.name}</IonText>
+                        <IonText className="product-price">${sellerProduct.price}</IonText>
+                      </div>
+                    </IonRouterLink>
+                  </IonCol>
+                ))}
+              </IonRow>
+            </IonGrid>
+          </>
+        )}
       </IonContent>
     </IonPage>
   );
