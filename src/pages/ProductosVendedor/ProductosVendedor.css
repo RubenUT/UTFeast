@@ -1,3 +1,9 @@
+.productos-vendedor {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .results-text {
     font-size: 18px;
     font-weight: bold;
@@ -63,25 +69,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100%;
 }
 
 .no-products-image {
-    width: 150px; /* Ajusta el tamaño según tus necesidades */
+    width: 150px;
     height: auto;
-    margin-bottom: 20px; /* Espaciado entre la imagen y el texto */
+    margin-bottom: 20px;
+    max-width: 200px;
 }
 
 .no-products-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px; /* Espaciado entre el título y el mensaje */
+    margin-bottom: 10px;
 }
 
 .no-products-message {
     font-size: 16px;
-    color: #555;
+    color: #666;
     line-height: 1.5;
-    margin: 0 10px; /* Espaciado lateral opcional */
-    text-align: center; /* Asegura que el texto esté centrado */
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }

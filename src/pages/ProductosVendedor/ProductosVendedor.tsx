@@ -27,7 +27,7 @@ const ProductosVendedor: React.FC = () => {
   }, [_id]);
 
   return (
-    <IonPage>
+    <IonPage className="productos-vendedor">
       <IonToolbar>
         <BackButton />
       </IonToolbar>
@@ -41,8 +41,8 @@ const ProductosVendedor: React.FC = () => {
             />
             <IonText className="no-products-title">No hay productos disponibles</IonText>
             <IonText className="no-products-message">
-              Lo sentimos, este vendedor no tiene productos disponibles por el momento.
-              Por favor, vuelve más tarde o intenta refrescar la página.
+              ¡Vaya!, parece que este vendedor no tiene productos disponibles por el momento.<br/>
+              Intenta volviendo más tarde.
             </IonText>
           </div>
         ) : (
