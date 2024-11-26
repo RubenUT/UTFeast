@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput, IonItem, IonLabel, IonTextarea, IonImg, IonIcon } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonButton, IonItem, IonImg, IonIcon } from '@ionic/react';
 import { useHistory, useParams } from 'react-router-dom';
 import './EditarPerfil.css';
 import BackButton from '../../components/BackButton/BackButton';
@@ -13,7 +13,6 @@ const EditarPerfil: React.FC = () => {
     const [descripcionPerfil, setDescripcionPerfil] = useState<string>('');
     const [imagePerfil, setImagePerfil] = useState<File | null>(null);
     const [imagePreviewPerfil, setImagePreviewPerfil] = useState<string | null>(null);
-    const textareaRefPerfil = useRef<HTMLIonTextareaElement>(null);
     const [numberPerfil, setNumberPerfil] = useState<string>('');
     const { _id } = useParams<{ _id: string }>();
 
@@ -31,11 +30,6 @@ const EditarPerfil: React.FC = () => {
             setImagePerfil(file);
             setImagePreviewPerfil(URL.createObjectURL(file));
         }
-    };
-
-    const handleDescriptionChange = (event: CustomEvent) => {
-        const textarea = event.target as HTMLIonTextareaElement;
-        setDescripcionPerfil(textarea.value || '');
     };
 
     const convertImageToBase64 = (file: File, quality: number = 0.7) => {
@@ -73,10 +67,10 @@ const EditarPerfil: React.FC = () => {
 
     const token = localStorage.getItem("authToken");
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchUser = async () => {
-            try{
-                const userResponse = await axios.get(`http://localhost:5100/utfeast/users/${_id}`,{
+            try {
+                const userResponse = await axios.get(`http://localhost:5100/utfeast/users/${_id}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,
@@ -87,8 +81,8 @@ const EditarPerfil: React.FC = () => {
                 setNumberPerfil(user.phone);
                 setDescripcionPerfil(user.description);
                 setImagePreviewPerfil(user.image);
-            }catch(e){
-                console.log('Error al cargar informacion del usuario:', e)
+            } catch (e) {
+                console.log('Error al cargar información del usuario:', e);
             }
         };
         fetchUser();
@@ -112,17 +106,13 @@ const EditarPerfil: React.FC = () => {
             image: imageBase64,
         };
 
-
         try {
-            const response = await axios.put(`http://localhost:5100/utfeast/users/${_id}`,
-                userData,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                    },
-                }
-            );
+            await axios.put(`http://localhost:5100/utfeast/users/${_id}`, userData, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
 
             history.push(`/Perfil`);
             window.location.reload();
@@ -168,56 +158,47 @@ const EditarPerfil: React.FC = () => {
                         </IonItem>
                     )}
 
-                    <IonItem className="form-group input-container" lines="none">
-                        <IonInput
+                    <div className="input-container">
+                        <label htmlFor="nombrePerfil">Nombre:</label>
+                        <input
+                            id="nombrePerfil"
                             type="text"
                             value={nombrePerfil}
-                            onIonChange={(e) => setNombrePerfil(e.detail.value!)}
+                            onChange={(e) => setNombrePerfil(e.target.value)}
                             placeholder="Ingresa tu nombre"
-                            label="Nombre:"
-                            labelPlacement="floating"
+                            className="input-field"
                         />
-                    </IonItem>
+                    </div>
 
-                    <IonItem className="form-group input-container" lines="none">
-                        <IonInput
+                    <div className="input-container">
+                        <label htmlFor="numberPerfil">Número:</label>
+                        <input
+                            id="numberPerfil"
                             type="number"
                             value={numberPerfil}
-                            onIonChange={(e) => setNumberPerfil(e.detail.value!)}
-                            placeholder="Ingresa tu numero"
-                            label="Numero:"
-                            labelPlacement="floating"
+                            onChange={(e) => setNumberPerfil(e.target.value)}
+                            placeholder="Ingresa tu número"
+                            className="input-field"
                         />
-                    </IonItem>
+                    </div>
 
-                    <IonItem className="form-group input-container" lines="none">
-                        <IonTextarea
-                            ref={textareaRefPerfil}
+                    <div className="input-container">
+                        <label htmlFor="descripcionPerfil">Descripción:</label>
+                        <textarea
+                            id="descripcionPerfil"
                             value={descripcionPerfil}
-                            onIonInput={handleDescriptionChange}
+                            onChange={(e) => setDescripcionPerfil(e.target.value)}
                             placeholder="Describe algo sobre ti"
-                            label="Descripcion:"
-                            labelPlacement="floating"
-                            autoGrow={true}
-                            counter={true}
-                            maxlength={100}
+                            className="textarea-field"
+                            maxLength={100}
                         />
-                    </IonItem>
+                    </div>
 
                     <div className="button-container">
-                        <IonButton
-                            expand="block"
-                            type="submit"
-                            className="save-btn"
-                        >
+                        <IonButton expand="block" type="submit" className="save-btn">
                             Guardar cambios
                         </IonButton>
-                        <IonButton
-                            expand="block"
-                            className="cancel-btn"
-                            fill="solid"
-                            onClick={handleCancelChanges}
-                        >
+                        <IonButton expand="block" className="cancel-btn" fill="solid" onClick={handleCancelChanges}>
                             Deshacer cambios
                         </IonButton>
                     </div>

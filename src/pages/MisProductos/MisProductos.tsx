@@ -6,31 +6,41 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { IProduct } from '../../interfaces/IProduct';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const MisProductos: React.FC = () => {
-
   const { _id } = useParams<{ _id: string }>();
   const [products, setProducts] = useState<IProduct[]>([]);
   const [showAlert, setShowAlert] = useState(false);
   const [productToDelete, setProductToDelete] = useState<IProduct | null>(null);
+  const history = useHistory();
+
+  const fetchProducts = async () => {
+    const token = localStorage.getItem("authToken");
+    try {
+      const response = await axios.get(`http://localhost:5100/utfeast/users/${_id}/products`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProducts(response.data.data);
+    } catch (e) {
+      console.error("Error al cargar los productos:", e);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const token = localStorage.getItem("authToken");
-      try {
-        const response = await axios.get(`http://localhost:5100/utfeast/users/${_id}/products`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProducts(response.data.data);
-      } catch (e) {
-        console.error("Error al cargar los productos:", e);
-      }
-    };
-
     fetchProducts();
   }, [_id]);
+
+  useEffect(() => {
+    const unlisten = history.listen((location) => {
+      if (location.pathname === `/MisProductos/${_id}`) {
+        fetchProducts();
+      }
+    });
+    return () => unlisten();
+  }, [history, _id]);
 
   const handleDeleteProduct = async (productId: string) => {
     const token = localStorage.getItem("authToken");
@@ -62,17 +72,17 @@ const MisProductos: React.FC = () => {
           <IonRow>
             {products.length === 0 ? (
               <div className="no-products-container">
-              <IonImg 
-                src="/src/assets/images/no-products.png" 
-                alt="No hay productos disponibles" 
-                className="no-products-image" 
-              />
-              <IonText className="no-products-title">No hay productos disponibles</IonText>
-              <IonText className="no-products-message">
-                ¡Vaya!, parece que aun no tiene productos disponibles por el momento.<br/>
-                Intenta agregar un producto.
-              </IonText>
-            </div>
+                <IonImg 
+                  src="/src/assets/images/no-products.png" 
+                  alt="No hay productos disponibles" 
+                  className="no-products-image" 
+                />
+                <IonText className="no-products-title">No hay productos disponibles</IonText>
+                <IonText className="no-products-message">
+                  ¡Vaya!, parece que aún no tiene productos disponibles por el momento.<br/>
+                  Intenta agregar un producto.
+                </IonText>
+              </div>
             ) : (
               products.map((product) => (
                 <IonCol size="6" key={product._id} className="product-card-colMisProductos">
@@ -121,7 +131,6 @@ const MisProductos: React.FC = () => {
             </div>
           </div>
         </IonModal>
-
       </IonContent>
     </IonPage>
   );
