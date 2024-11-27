@@ -17,6 +17,39 @@ const EditProduct: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const { _id } = useParams<{ _id: string }>();
 
+    const convertImageToBase64 = (file: File, quality: number = 0.7) => {
+        return new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target?.result as string;
+
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+
+                    const maxWidth = 800;
+                    const scaleFactor = img.width > maxWidth ? maxWidth / img.width : 1;
+                    const width = img.width * scaleFactor;
+                    const height = img.height * scaleFactor;
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    ctx?.drawImage(img, 0, 0, width, height);
+
+                    const base64Image = canvas.toDataURL("image/jpeg", quality);
+                    resolve(base64Image);
+                };
+
+                img.onerror = reject;
+            };
+
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    };
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -61,10 +94,19 @@ const EditProduct: React.FC = () => {
             return;
         }
 
+        let imageBase64 = null;
+
+        if (imageProduct) {
+            imageBase64 = await convertImageToBase64(imageProduct, 0.7);
+        } else if (imagePreviewProduct) {
+            imageBase64 = imagePreviewProduct;
+        }
+
         const productData = {
             name: nameProduct,
             price: parseFloat(priceProduct),
             description: descriptionProduct,
+            image: imageBase64,
             categoryId: selectedCategory,
         };
 
